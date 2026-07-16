@@ -154,10 +154,23 @@ class MainWindow(QMainWindow):
         self._debounce.start()
 
     def _apply_autoframe_roi(self):
-        if self.last_result is None or self.last_result.roi_rect is None:
-            self.lbl_status.setText("尚無 AutoFrame 結果可套用")
+        if self.session.gray is None:
+            self.lbl_status.setText("尚未載入影像，無法套用 AutoFrame")
             return
-        self.params.set_manual_rect(self.last_result.roi_rect)
+        self.lbl_status.setText("AutoFrame 計算中…")
+        QApplication.setOverrideCursor(Qt.WaitCursor)
+        QApplication.processEvents()
+        try:
+            rect = ve_core.resolve_roi(
+                self.session.gray, ve_core.RoiSpec("AutoFrame"),
+                self.session.cfg)
+        except ve_core.FrameNotFound as e:
+            self.lbl_status.setText("AutoFrame 找框失敗：%s" % e)
+            return
+        finally:
+            QApplication.restoreOverrideCursor()
+        self.params.set_manual_rect(rect)
+        self.view.draw_roi(rect)
         self.lbl_status.setText("已將 AutoFrame 結果套用為 Manual ROI 起點")
 
     def _on_draw_roi_toggled(self, checked):
