@@ -8,6 +8,7 @@
 - client 字串欄位只允許 ASCII
 """
 import json
+import os
 import time
 
 # ---- engine error codes（PROTOCOL.md 第 9 節）----
@@ -68,6 +69,10 @@ def parse_request(line: str) -> dict:
     if cmd in ("inspect", "teach"):
         if not isinstance(req.get("image_path"), str) or not req["image_path"]:
             raise ProtocolError(E_BAD_FIELD, "missing image_path")
+        # 安全增強：驗證 image_path 的附檔名，防範非影像格式之任意檔案讀取/處理/複製 (Path Traversal/Arbitrary File Access)
+        ext = os.path.splitext(req["image_path"])[1].lower()
+        if ext not in (".png", ".bmp", ".jpg", ".jpeg", ".tif", ".tiff"):
+            raise ProtocolError(E_BAD_FIELD, "invalid image extension: %s" % ext)
         rm = req.get("roi_mode", "AutoFrame")
         if rm not in ("Manual", "AutoFrame"):
             raise ProtocolError(E_BAD_FIELD, "roi_mode must be Manual|AutoFrame")
