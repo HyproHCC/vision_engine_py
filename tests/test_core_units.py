@@ -343,3 +343,41 @@ def test_family_detection_break_lengths_px_defaults_empty_for_teach():
                       angle_tol_deg=5.0, image_name="ok.png")
     assert isinstance(r, ve_core.TeachResult)
     assert all(f.break_lengths_px == [] for f in r.families)
+
+
+# --------------------------------------- 安全增強驗證
+def test_protocol_image_path_extension_validation():
+    from ve_server import protocol as P
+    import json
+
+    # 合法請求
+    valid_cases = [
+        "image.png", "image.PNG", "image.jpg", "image.jpeg", "image.bmp", "image.tif", "image.tiff",
+        "C:/path/to/img.png", "/abs/path/img.JPEG"
+    ]
+    for filename in valid_cases:
+        req = {
+            "request_id": "REQ-123456",
+            "cmd": "inspect",
+            "image_path": filename,
+            "piece_id": "P-001",
+            "recipe_name": "RECIPE_A"
+        }
+        parsed = P.parse_request(json.dumps(req))
+        assert parsed["image_path"] == filename
+
+    # 不合法請求：不合法的附檔名
+    invalid_cases = [
+        "image.txt", "image.exe", "image.py", "image.json", "image", "image.", "image.png.txt"
+    ]
+    for filename in invalid_cases:
+        req = {
+            "request_id": "REQ-123456",
+            "cmd": "inspect",
+            "image_path": filename,
+            "piece_id": "P-001",
+            "recipe_name": "RECIPE_A"
+        }
+        with pytest.raises(P.ProtocolError) as exc_info:
+            P.parse_request(json.dumps(req))
+        assert exc_info.value.code == P.E_BAD_FIELD
