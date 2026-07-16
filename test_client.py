@@ -41,17 +41,36 @@ def main():
     try:
         if cmd == "demo":
             send_recv(s, {"cmd": "ping"})
-            for _ in range(3):
-                send_recv(s, {"cmd": "inspect", "image_path": img,
-                              "piece_id": "TEST-001", "recipe_name": "TYPE_A",
-                              "roi_mode": "AutoFrame",
-                              "angle_tol_deg": 5.0, "param_source": "None"})
+            # 1st inspect: AutoFrame
+            send_recv(s, {"cmd": "inspect", "image_path": img,
+                          "piece_id": "TEST-001", "recipe_name": "TYPE_A",
+                          "roi_mode": "AutoFrame",
+                          "angle_tol_deg": 5.0, "param_source": "None"})
+            # 2nd inspect: Manual ROI
+            send_recv(s, {"cmd": "inspect", "image_path": img,
+                          "piece_id": "TEST-001", "recipe_name": "TYPE_A",
+                          "roi_mode": "Manual",
+                          "roi_rect": {"left": 500, "top": 480, "right": 3300, "bottom": 2230},
+                          "angle_tol_deg": 5.0, "param_source": "None"})
+            # 3rd inspect: AutoFrame
+            send_recv(s, {"cmd": "inspect", "image_path": img,
+                          "piece_id": "TEST-001", "recipe_name": "TYPE_A",
+                          "roi_mode": "AutoFrame",
+                          "angle_tol_deg": 5.0, "param_source": "None"})
             send_recv(s, {"cmd": "teach", "image_path": img,
                           "recipe_name": "TYPE_A", "roi_mode": "AutoFrame",
                           "angle_tol_deg": 5.0})
         elif cmd in ("inspect", "teach"):
+            roi_mode = "AutoFrame"
+            roi_rect = None
+            if len(sys.argv) > 3 and sys.argv[3].lower() == "manual":
+                roi_mode = "Manual"
+                roi_rect = {"left": 500, "top": 480, "right": 3300, "bottom": 2230}
+
             req = {"cmd": cmd, "image_path": img, "recipe_name": "TYPE_A",
-                   "roi_mode": "AutoFrame", "angle_tol_deg": 5.0}
+                   "roi_mode": roi_mode, "angle_tol_deg": 5.0}
+            if roi_rect is not None:
+                req["roi_rect"] = roi_rect
             if cmd == "inspect":
                 req.update(piece_id="TEST-001", param_source="None")
             send_recv(s, req)

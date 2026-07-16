@@ -73,16 +73,26 @@ def parse_request(line: str) -> dict:
             raise ProtocolError(E_BAD_FIELD, "roi_mode must be Manual|AutoFrame")
         if rm == "Manual":
             rr = req.get("roi_rect")
-            if (not isinstance(rr, dict) or
-                    not all(isinstance(rr.get(k), (int, float))
-                           for k in ("left", "top", "right", "bottom"))):
+            if not isinstance(rr, dict):
                 raise ProtocolError(
                     E_BAD_FIELD,
                     "roi_mode=Manual requires roi_rect{left,top,right,bottom}")
+            for k in ("left", "top", "right", "bottom"):
+                val = rr.get(k)
+                if type(val) is not int:
+                    raise ProtocolError(
+                        E_BAD_FIELD,
+                        "roi_mode=Manual requires roi_rect{left,top,right,bottom} with all values as integers")
             if rr["right"] <= rr["left"] or rr["bottom"] <= rr["top"]:
                 raise ProtocolError(
                     E_BAD_FIELD,
                     "roi_rect requires right>left and bottom>top")
+            req["roi_rect"] = {
+                "x": rr["left"],
+                "y": rr["top"],
+                "w": rr["right"] - rr["left"],
+                "h": rr["bottom"] - rr["top"]
+            }
     if cmd == "inspect":
         ps = req.get("param_source", "None")
         if ps not in ("None", "Taught", "Manual"):

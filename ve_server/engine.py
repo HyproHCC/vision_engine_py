@@ -32,7 +32,10 @@ def load_gray(image_path: str) -> np.ndarray:
 
 
 def _rect_from_wire(d: dict) -> ve_core.Rect:
-    """LabVIEW Rectangle cluster（IMAQ 慣例：right/bottom 不含）-> ve_core.Rect。"""
+    """LabVIEW Rectangle cluster（IMAQ 慣例：right/bottom 不含）-> ve_core.Rect。
+    同時支援 {x, y, w, h} 以相容直接調用 engine.inspect 的測試。"""
+    if "x" in d:
+        return ve_core.Rect(int(d["x"]), int(d["y"]), int(d["w"]), int(d["h"]))
     left, top = int(d["left"]), int(d["top"])
     return ve_core.Rect(left, top, int(d["right"]) - left, int(d["bottom"]) - top)
 
