@@ -1,0 +1,32 @@
+name: Jules 認領 Issue
+on:
+  issues:
+    types: [labeled]
+jobs:
+  dispatch:
+    if: github.event.label.name == 'agent:jules'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 建立 Jules session
+        env:
+          JULES_API_KEY: ${{ secrets.JULES_API_KEY }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUM: ${{ github.event.issue.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          BODY=$(jq -n \
+            --arg prompt "$ISSUE_TITLE
+
+          $ISSUE_BODY" \
+            --arg source "sources/github/$REPO" \
+            --arg title "Issue #$ISSUE_NUM: $ISSUE_TITLE" \
+            '{prompt: $prompt,
+              sourceContext: {source: $source, githubRepoContext: {startingBranch: "main"}},
+              automationMode: "AUTO_CREATE_PR",
+              title: $title}')
+          curl -sS -f 'https://jules.googleapis.com/v1alpha/sessions' \
+            -X POST \
+            -H 'Content-Type: application/json' \
+            -H "x-goog-api-key: $JULES_API_KEY" \
+            -d "$BODY"
