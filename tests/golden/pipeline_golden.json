@@ -1,0 +1,383 @@
+{
+  "ground_truth_breaks": [
+    [
+      "v",
+      1250,
+      974,
+      1076
+    ],
+    [
+      "h",
+      1350,
+      1654,
+      1756
+    ]
+  ],
+  "inspect_discovery_ng": {
+    "angle_deg": -1.5,
+    "defects": [
+      {
+        "length_px": 102.0,
+        "line_id": 6,
+        "x1": 1240.8,
+        "x2": 1243.4,
+        "y1": 991.6,
+        "y2": 1092.6
+      },
+      {
+        "length_px": 102.0,
+        "line_id": 28,
+        "x1": 1653.5,
+        "x2": 1754.5,
+        "y1": 1358.0,
+        "y2": 1355.3
+      }
+    ],
+    "detection_mode": "discovery",
+    "h_break_lengths_px": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      102.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "lines_found": 34,
+    "ng_image_path": true,
+    "roi_used": {
+      "bottom": 2410,
+      "left": 382,
+      "right": 3458,
+      "top": 340
+    },
+    "status": "NG",
+    "v_break_lengths_px": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      102.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "inspect_manual_roi_ng": {
+    "angle_deg": -1.5,
+    "defects": [
+      {
+        "length_px": 102.0,
+        "line_id": 6,
+        "x1": 1240.8,
+        "x2": 1243.4,
+        "y1": 991.6,
+        "y2": 1092.6
+      },
+      {
+        "length_px": 102.0,
+        "line_id": 28,
+        "x1": 1653.5,
+        "x2": 1754.5,
+        "y1": 1358.0,
+        "y2": 1355.3
+      }
+    ],
+    "detection_mode": "discovery",
+    "h_break_lengths_px": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      102.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "lines_found": 34,
+    "ng_image_path": true,
+    "roi_used": {
+      "bottom": 2230,
+      "left": 500,
+      "right": 3300,
+      "top": 480
+    },
+    "status": "NG",
+    "v_break_lengths_px": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      102.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "inspect_placement": {
+    "angle_deg": -1.5,
+    "defects": [],
+    "detection_mode": "n/a",
+    "h_break_lengths_px": [],
+    "lines_found": 0,
+    "ng_image_path": false,
+    "roi_used": {
+      "bottom": 2410,
+      "left": 382,
+      "right": 3458,
+      "top": 340
+    },
+    "status": "PLACEMENT_ERROR",
+    "v_break_lengths_px": []
+  },
+  "inspect_taught_ng": {
+    "angle_deg": -1.5,
+    "defects": [
+      {
+        "length_px": 102.0,
+        "line_id": 6,
+        "x1": 1237.8,
+        "x2": 1240.4,
+        "y1": 991.7,
+        "y2": 1092.7
+      },
+      {
+        "length_px": 102.0,
+        "line_id": 28,
+        "x1": 1653.4,
+        "x2": 1754.4,
+        "y1": 1355.0,
+        "y2": 1352.3
+      }
+    ],
+    "detection_mode": "taught",
+    "h_break_lengths_px": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      102.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "lines_found": 34,
+    "ng_image_path": true,
+    "roi_used": {
+      "bottom": 2410,
+      "left": 382,
+      "right": 3458,
+      "top": 340
+    },
+    "status": "NG",
+    "v_break_lengths_px": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      102.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "inspect_taught_ok": {
+    "angle_deg": -1.5,
+    "defects": [],
+    "detection_mode": "taught",
+    "h_break_lengths_px": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "lines_found": 34,
+    "ng_image_path": false,
+    "roi_used": {
+      "bottom": 2410,
+      "left": 382,
+      "right": 3458,
+      "top": 340
+    },
+    "status": "OK",
+    "v_break_lengths_px": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "teach_ok": {
+    "angle_deg": -1.5,
+    "preview": {
+      "families": [
+        {
+          "angle_deg": -1.5,
+          "axis": "v",
+          "line_count": 21,
+          "pitch_px": 130.0
+        },
+        {
+          "angle_deg": -1.5,
+          "axis": "h",
+          "line_count": 13,
+          "pitch_px": 130.0
+        }
+      ]
+    },
+    "roi_used": {
+      "bottom": 2410,
+      "left": 382,
+      "right": 3458,
+      "top": 340
+    },
+    "status": "OK",
+    "taught_params": {
+      "families": [
+        {
+          "angle_deg": -1.5,
+          "axis": "v",
+          "line_count": 21,
+          "pitch_px": 130.0,
+          "positions_px": [
+            195.0,
+            325.0,
+            455.0,
+            585.0,
+            715.0,
+            845.0,
+            975.0,
+            1105.0,
+            1235.0,
+            1365.0,
+            1495.0,
+            1625.0,
+            1755.0,
+            1885.0,
+            2015.0,
+            2145.0,
+            2275.0,
+            2405.0,
+            2535.0,
+            2665.0,
+            2795.0
+          ]
+        },
+        {
+          "angle_deg": -1.5,
+          "axis": "h",
+          "line_count": 13,
+          "pitch_px": 130.0,
+          "positions_px": [
+            195.0,
+            325.0,
+            455.0,
+            585.0,
+            715.0,
+            845.0,
+            975.0,
+            1105.0,
+            1235.0,
+            1365.0,
+            1495.0,
+            1625.0,
+            1755.0
+          ]
+        }
+      ],
+      "reference": {
+        "image": "synthetic_ok.png",
+        "taught_at": "2026-07-16T07:18:04"
+      },
+      "thresholds": {
+        "band_halfwidth_px": 4,
+        "cut_bright_thresh": 180,
+        "edge_guard_px": 10,
+        "gap_merge_px": 6,
+        "min_break_len_px": 8
+      },
+      "tp_version": 1
+    }
+  }
+}

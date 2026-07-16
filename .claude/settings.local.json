@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(venv/Scripts/python -m pytest tests -q)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(xargs -I{} echo {})",
+      "Bash(python -c ' *)",
+      "Bash(ls \"C:\\\\Users\\\\HCC\\\\Documents\\\\【PROJECT】\\\\立誠V-cut陶瓷劃片機改機\\\\測試\\\\劃片後檢\\\\backlightTest\\\\0709LowLight\\\\50k\" | head -30 *)",
+      "Bash(venv/Scripts/python -c ' *)",
+      "Bash(venv/Scripts/python tests/stability_check.py \"C:\\\\Users\\\\HCC\\\\Documents\\\\【PROJECT】\\\\立誠V-cut陶瓷劃片機改機\\\\測試\\\\劃片後檢\\\\backlightTest\\\\0709LowLight\\\\50k\\\\cor\" --out=tests/stability_report_50k_cor.json)",
+      "Bash(xargs -I{} sh -c 'echo ==={}===; cat {}')",
+      "Bash(venv/Scripts/python -c \"import matplotlib\")"
+    ]
+  }
+}

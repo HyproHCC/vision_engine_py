@@ -1,0 +1,17 @@
+{
+  "host": "127.0.0.1",
+  "port": 5710,
+  "ng_dir": "ng",
+  "ng_retention_days": 30,
+  "log_level": "INFO",
+  "expected_image": {
+    "width": 3840,
+    "height": 2748,
+    "format": "PNG"
+  },
+  "algo": {
+    "cut_bright_thresh": 180,
+    "min_break_len_px": 8,
+    "band_halfwidth_px": 4
+  }
+}

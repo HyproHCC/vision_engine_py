@@ -1,0 +1,31 @@
+# 忽略圖片中的資料夾
+testdata/
+ve_core/
+ve_server/
+ve_ui/
+venv/
+
+# Python 常見暫存檔案
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# 虛擬環境
+.env
+.venv/
+
+# Jupyter Notebook 檔案快取
+.ipynb_checkpoints/
+
+# 系統檔案
+.DS_Store
+Thumbs.db
+
+# 日誌檔案
+*.log
+
+# 編譯輸出
+build/
+dist/
+*.egg-info/

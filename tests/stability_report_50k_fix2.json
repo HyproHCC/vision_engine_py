@@ -1,0 +1,813 @@
+{
+  "angles": [
+    -5.0,
+    -3.75,
+    -2.5,
+    -1.25,
+    0.0,
+    1.25,
+    2.5,
+    3.75,
+    5.0
+  ],
+  "rows": [
+    {
+      "status": "PLACEMENT_ERROR",
+      "angle_deg": -5.0,
+      "lines_found": 0,
+      "n_defects": 0,
+      "families": [],
+      "elapsed_ms": 452.0,
+      "image": "1.png",
+      "injected_angle": 5.0,
+      "target_angle": -5.0
+    },
+    {
+      "status": "NG",
+      "angle_deg": -3.75,
+      "lines_found": 23,
+      "n_defects": 156,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 128.0,
+          "line_count": 15
+        },
+        {
+          "axis": "h",
+          "pitch_px": 142.0,
+          "line_count": 8
+        }
+      ],
+      "elapsed_ms": 1162.9,
+      "image": "1.png",
+      "injected_angle": 3.75,
+      "target_angle": -3.75
+    },
+    {
+      "status": "NG",
+      "angle_deg": -2.5,
+      "lines_found": 21,
+      "n_defects": 140,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 128.0,
+          "line_count": 15
+        },
+        {
+          "axis": "h",
+          "pitch_px": 168.0,
+          "line_count": 6
+        }
+      ],
+      "elapsed_ms": 1086.6,
+      "image": "1.png",
+      "injected_angle": 2.5,
+      "target_angle": -2.5
+    },
+    {
+      "status": "NG",
+      "angle_deg": -1.25,
+      "lines_found": 19,
+      "n_defects": 116,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.5,
+          "line_count": 15
+        },
+        {
+          "axis": "h",
+          "pitch_px": 267.0,
+          "line_count": 4
+        }
+      ],
+      "elapsed_ms": 866.3,
+      "image": "1.png",
+      "injected_angle": 1.25,
+      "target_angle": -1.25
+    },
+    {
+      "status": "NG",
+      "angle_deg": -0.0,
+      "lines_found": 16,
+      "n_defects": 133,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 128.0,
+          "line_count": 11
+        },
+        {
+          "axis": "h",
+          "pitch_px": 151.5,
+          "line_count": 5
+        }
+      ],
+      "elapsed_ms": 1095.1,
+      "image": "1.png",
+      "injected_angle": 0.0,
+      "target_angle": 0.0
+    },
+    {
+      "status": "NG",
+      "angle_deg": 1.45,
+      "lines_found": 19,
+      "n_defects": 124,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.5,
+          "line_count": 15
+        },
+        {
+          "axis": "h",
+          "pitch_px": 266.0,
+          "line_count": 4
+        }
+      ],
+      "elapsed_ms": 1049.3,
+      "image": "1.png",
+      "injected_angle": -1.25,
+      "target_angle": 1.25
+    },
+    {
+      "status": "NG",
+      "angle_deg": 2.65,
+      "lines_found": 19,
+      "n_defects": 120,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 128.0,
+          "line_count": 15
+        },
+        {
+          "axis": "h",
+          "pitch_px": 266.0,
+          "line_count": 4
+        }
+      ],
+      "elapsed_ms": 1114.2,
+      "image": "1.png",
+      "injected_angle": -2.5,
+      "target_angle": 2.5
+    },
+    {
+      "status": "NG",
+      "angle_deg": 3.85,
+      "lines_found": 22,
+      "n_defects": 152,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 128.0,
+          "line_count": 15
+        },
+        {
+          "axis": "h",
+          "pitch_px": 150.5,
+          "line_count": 7
+        }
+      ],
+      "elapsed_ms": 1152.5,
+      "image": "1.png",
+      "injected_angle": -3.75,
+      "target_angle": 3.75
+    },
+    {
+      "status": "PLACEMENT_ERROR",
+      "angle_deg": 5.15,
+      "lines_found": 0,
+      "n_defects": 0,
+      "families": [],
+      "elapsed_ms": 424.0,
+      "image": "1.png",
+      "injected_angle": -5.0,
+      "target_angle": 5.0
+    },
+    {
+      "status": "PLACEMENT_ERROR",
+      "angle_deg": -5.05,
+      "lines_found": 0,
+      "n_defects": 0,
+      "families": [],
+      "elapsed_ms": 504.9,
+      "image": "2.png",
+      "injected_angle": 5.2,
+      "target_angle": -5.0
+    },
+    {
+      "status": "NG",
+      "angle_deg": -3.8,
+      "lines_found": 29,
+      "n_defects": 387,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.5,
+          "line_count": 15
+        },
+        {
+          "axis": "h",
+          "pitch_px": 127.0,
+          "line_count": 14
+        }
+      ],
+      "elapsed_ms": 1114.6,
+      "image": "2.png",
+      "injected_angle": 3.95,
+      "target_angle": -3.75
+    },
+    {
+      "status": "NG",
+      "angle_deg": -2.55,
+      "lines_found": 29,
+      "n_defects": 374,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.5,
+          "line_count": 15
+        },
+        {
+          "axis": "h",
+          "pitch_px": 127.0,
+          "line_count": 14
+        }
+      ],
+      "elapsed_ms": 941.9,
+      "image": "2.png",
+      "injected_angle": 2.7,
+      "target_angle": -2.5
+    },
+    {
+      "status": "NG",
+      "angle_deg": -1.3,
+      "lines_found": 29,
+      "n_defects": 384,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.5,
+          "line_count": 15
+        },
+        {
+          "axis": "h",
+          "pitch_px": 127.0,
+          "line_count": 14
+        }
+      ],
+      "elapsed_ms": 899.2,
+      "image": "2.png",
+      "injected_angle": 1.45,
+      "target_angle": -1.25
+    },
+    {
+      "status": "NG",
+      "angle_deg": 0.2,
+      "lines_found": 25,
+      "n_defects": 389,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 128.0,
+          "line_count": 11
+        },
+        {
+          "axis": "h",
+          "pitch_px": 127.0,
+          "line_count": 14
+        }
+      ],
+      "elapsed_ms": 1038.3,
+      "image": "2.png",
+      "injected_angle": 0.0,
+      "target_angle": 0.0
+    },
+    {
+      "status": "NG",
+      "angle_deg": 1.25,
+      "lines_found": 31,
+      "n_defects": 377,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.0,
+          "line_count": 17
+        },
+        {
+          "axis": "h",
+          "pitch_px": 127.0,
+          "line_count": 14
+        }
+      ],
+      "elapsed_ms": 981.2,
+      "image": "2.png",
+      "injected_angle": -1.05,
+      "target_angle": 1.25
+    },
+    {
+      "status": "NG",
+      "angle_deg": 2.5,
+      "lines_found": 29,
+      "n_defects": 362,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.5,
+          "line_count": 15
+        },
+        {
+          "axis": "h",
+          "pitch_px": 128.0,
+          "line_count": 14
+        }
+      ],
+      "elapsed_ms": 1000.3,
+      "image": "2.png",
+      "injected_angle": -2.3,
+      "target_angle": 2.5
+    },
+    {
+      "status": "NG",
+      "angle_deg": 3.75,
+      "lines_found": 29,
+      "n_defects": 377,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.5,
+          "line_count": 15
+        },
+        {
+          "axis": "h",
+          "pitch_px": 127.0,
+          "line_count": 14
+        }
+      ],
+      "elapsed_ms": 1131.4,
+      "image": "2.png",
+      "injected_angle": -3.55,
+      "target_angle": 3.75
+    },
+    {
+      "status": "NG",
+      "angle_deg": 5.0,
+      "lines_found": 31,
+      "n_defects": 377,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.0,
+          "line_count": 17
+        },
+        {
+          "axis": "h",
+          "pitch_px": 128.0,
+          "line_count": 14
+        }
+      ],
+      "elapsed_ms": 1119.7,
+      "image": "2.png",
+      "injected_angle": -4.8,
+      "target_angle": 5.0
+    },
+    {
+      "status": "PLACEMENT_ERROR",
+      "angle_deg": -5.1,
+      "lines_found": 0,
+      "n_defects": 0,
+      "families": [],
+      "elapsed_ms": 416.7,
+      "image": "3.png",
+      "injected_angle": 5.25,
+      "target_angle": -5.0
+    },
+    {
+      "status": "NG",
+      "angle_deg": -3.85,
+      "lines_found": 34,
+      "n_defects": 392,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.0,
+          "line_count": 17
+        },
+        {
+          "axis": "h",
+          "pitch_px": 127.0,
+          "line_count": 17
+        }
+      ],
+      "elapsed_ms": 1096.9,
+      "image": "3.png",
+      "injected_angle": 4.0,
+      "target_angle": -3.75
+    },
+    {
+      "status": "NG",
+      "angle_deg": -2.55,
+      "lines_found": 32,
+      "n_defects": 382,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.0,
+          "line_count": 17
+        },
+        {
+          "axis": "h",
+          "pitch_px": 127.0,
+          "line_count": 15
+        }
+      ],
+      "elapsed_ms": 1224.9,
+      "image": "3.png",
+      "injected_angle": 2.75,
+      "target_angle": -2.5
+    },
+    {
+      "status": "NG",
+      "angle_deg": -1.3,
+      "lines_found": 32,
+      "n_defects": 380,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.0,
+          "line_count": 16
+        },
+        {
+          "axis": "h",
+          "pitch_px": 127.0,
+          "line_count": 16
+        }
+      ],
+      "elapsed_ms": 805.1,
+      "image": "3.png",
+      "injected_angle": 1.5,
+      "target_angle": -1.25
+    },
+    {
+      "status": "NG",
+      "angle_deg": 0.25,
+      "lines_found": 30,
+      "n_defects": 369,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.5,
+          "line_count": 15
+        },
+        {
+          "axis": "h",
+          "pitch_px": 127.5,
+          "line_count": 15
+        }
+      ],
+      "elapsed_ms": 958.8,
+      "image": "3.png",
+      "injected_angle": 0.0,
+      "target_angle": 0.0
+    },
+    {
+      "status": "NG",
+      "angle_deg": 1.3,
+      "lines_found": 31,
+      "n_defects": 378,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.0,
+          "line_count": 16
+        },
+        {
+          "axis": "h",
+          "pitch_px": 127.5,
+          "line_count": 15
+        }
+      ],
+      "elapsed_ms": 953.4,
+      "image": "3.png",
+      "injected_angle": -1.0,
+      "target_angle": 1.25
+    },
+    {
+      "status": "NG",
+      "angle_deg": 2.5,
+      "lines_found": 31,
+      "n_defects": 372,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.0,
+          "line_count": 16
+        },
+        {
+          "axis": "h",
+          "pitch_px": 127.5,
+          "line_count": 15
+        }
+      ],
+      "elapsed_ms": 894.1,
+      "image": "3.png",
+      "injected_angle": -2.25,
+      "target_angle": 2.5
+    },
+    {
+      "status": "NG",
+      "angle_deg": 3.75,
+      "lines_found": 33,
+      "n_defects": 386,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.0,
+          "line_count": 17
+        },
+        {
+          "axis": "h",
+          "pitch_px": 127.0,
+          "line_count": 16
+        }
+      ],
+      "elapsed_ms": 990.4,
+      "image": "3.png",
+      "injected_angle": -3.5,
+      "target_angle": 3.75
+    },
+    {
+      "status": "NG",
+      "angle_deg": 5.0,
+      "lines_found": 33,
+      "n_defects": 386,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.0,
+          "line_count": 17
+        },
+        {
+          "axis": "h",
+          "pitch_px": 127.0,
+          "line_count": 16
+        }
+      ],
+      "elapsed_ms": 934.7,
+      "image": "3.png",
+      "injected_angle": -4.75,
+      "target_angle": 5.0
+    },
+    {
+      "status": "PLACEMENT_ERROR",
+      "angle_deg": -5.15,
+      "lines_found": 0,
+      "n_defects": 0,
+      "families": [],
+      "elapsed_ms": 374.4,
+      "image": "4.png",
+      "injected_angle": 5.2,
+      "target_angle": -5.0
+    },
+    {
+      "status": "NG",
+      "angle_deg": -3.9,
+      "lines_found": 27,
+      "n_defects": 311,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.0,
+          "line_count": 16
+        },
+        {
+          "axis": "h",
+          "pitch_px": 128.0,
+          "line_count": 11
+        }
+      ],
+      "elapsed_ms": 853.0,
+      "image": "4.png",
+      "injected_angle": 3.95,
+      "target_angle": -3.75
+    },
+    {
+      "status": "NG",
+      "angle_deg": -2.65,
+      "lines_found": 26,
+      "n_defects": 288,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.0,
+          "line_count": 16
+        },
+        {
+          "axis": "h",
+          "pitch_px": 128.0,
+          "line_count": 10
+        }
+      ],
+      "elapsed_ms": 866.2,
+      "image": "4.png",
+      "injected_angle": 2.7,
+      "target_angle": -2.5
+    },
+    {
+      "status": "NG",
+      "angle_deg": -1.4,
+      "lines_found": 20,
+      "n_defects": 162,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.5,
+          "line_count": 15
+        },
+        {
+          "axis": "h",
+          "pitch_px": 275.0,
+          "line_count": 5
+        }
+      ],
+      "elapsed_ms": 820.0,
+      "image": "4.png",
+      "injected_angle": 1.45,
+      "target_angle": -1.25
+    },
+    {
+      "status": "NG",
+      "angle_deg": 0.2,
+      "lines_found": 15,
+      "n_defects": 155,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 128.0,
+          "line_count": 10
+        },
+        {
+          "axis": "h",
+          "pitch_px": 276.0,
+          "line_count": 5
+        }
+      ],
+      "elapsed_ms": 839.1,
+      "image": "4.png",
+      "injected_angle": 0.0,
+      "target_angle": 0.0
+    },
+    {
+      "status": "NG",
+      "angle_deg": 1.3,
+      "lines_found": 21,
+      "n_defects": 164,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.0,
+          "line_count": 16
+        },
+        {
+          "axis": "h",
+          "pitch_px": 276.0,
+          "line_count": 5
+        }
+      ],
+      "elapsed_ms": 834.4,
+      "image": "4.png",
+      "injected_angle": -1.05,
+      "target_angle": 1.25
+    },
+    {
+      "status": "NG",
+      "angle_deg": 2.55,
+      "lines_found": 20,
+      "n_defects": 158,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.5,
+          "line_count": 15
+        },
+        {
+          "axis": "h",
+          "pitch_px": 276.0,
+          "line_count": 5
+        }
+      ],
+      "elapsed_ms": 871.0,
+      "image": "4.png",
+      "injected_angle": -2.3,
+      "target_angle": 2.5
+    },
+    {
+      "status": "NG",
+      "angle_deg": 3.8,
+      "lines_found": 21,
+      "n_defects": 174,
+      "families": [
+        {
+          "axis": "v",
+          "pitch_px": 127.0,
+          "line_count": 16
+        },
+        {
+          "axis": "h",
+          "pitch_px": 276.5,
+          "line_count": 5
+        }
+      ],
+      "elapsed_ms": 846.8,
+      "image": "4.png",
+      "injected_angle": -3.55,
+      "target_angle": 3.75
+    },
+    {
+      "status": "PLACEMENT_ERROR",
+      "angle_deg": 5.05,
+      "lines_found": 0,
+      "n_defects": 0,
+      "families": [],
+      "elapsed_ms": 372.7,
+      "image": "4.png",
+      "injected_angle": -4.8,
+      "target_angle": 5.0
+    }
+  ],
+  "summary": {
+    "1.png": {
+      "n_runs": 9,
+      "statuses": [
+        "NG",
+        "PLACEMENT_ERROR"
+      ],
+      "lines_found_stable": false,
+      "lines_found_values": [
+        16,
+        19,
+        21,
+        22,
+        23
+      ],
+      "angle_recovery_max_err_deg": 0.2,
+      "angle_recovery_mean_err_deg": 0.064,
+      "elapsed_ms_max": 1162.9
+    },
+    "2.png": {
+      "n_runs": 9,
+      "statuses": [
+        "NG",
+        "PLACEMENT_ERROR"
+      ],
+      "lines_found_stable": false,
+      "lines_found_values": [
+        25,
+        29,
+        31
+      ],
+      "angle_recovery_max_err_deg": 0.2,
+      "angle_recovery_mean_err_deg": 0.044,
+      "elapsed_ms_max": 1131.4
+    },
+    "3.png": {
+      "n_runs": 9,
+      "statuses": [
+        "NG",
+        "PLACEMENT_ERROR"
+      ],
+      "lines_found_stable": false,
+      "lines_found_values": [
+        30,
+        31,
+        32,
+        33,
+        34
+      ],
+      "angle_recovery_max_err_deg": 0.25,
+      "angle_recovery_mean_err_deg": 0.062,
+      "elapsed_ms_max": 1224.9
+    },
+    "4.png": {
+      "n_runs": 9,
+      "statuses": [
+        "NG",
+        "PLACEMENT_ERROR"
+      ],
+      "lines_found_stable": false,
+      "lines_found_values": [
+        15,
+        20,
+        21,
+        26,
+        27
+      ],
+      "angle_recovery_max_err_deg": 0.2,
+      "angle_recovery_mean_err_deg": 0.114,
+      "elapsed_ms_max": 871.0
+    }
+  }
+}

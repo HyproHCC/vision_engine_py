@@ -1,0 +1,4 @@
+# ve_ui 調機工具（工程師機 / 調機時的機台 venv 加裝）
+-r requirements.txt
+PySide6-Essentials>=6.6
+pytest>=8

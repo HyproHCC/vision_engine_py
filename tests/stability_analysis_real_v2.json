@@ -1,0 +1,1186 @@
+[
+  {
+    "image": "1_cor.png",
+    "axis": "v",
+    "pitch_values": [
+      113.0,
+      113.0,
+      124.0,
+      124.5,
+      124.0,
+      124.0,
+      125.0,
+      113.5
+    ],
+    "pitch_range_px": 12.0,
+    "pitch_pass": false,
+    "count_checks": [
+      {
+        "target_angle": -3.75,
+        "line_count": 21,
+        "expected": 33.14,
+        "diff": -12.14,
+        "pass": false
+      },
+      {
+        "target_angle": -2.5,
+        "line_count": 21,
+        "expected": 33.15,
+        "diff": -12.15,
+        "pass": false
+      },
+      {
+        "target_angle": -1.25,
+        "line_count": 16,
+        "expected": 30.19,
+        "diff": -14.19,
+        "pass": false
+      },
+      {
+        "target_angle": 0.0,
+        "line_count": 17,
+        "expected": 29.97,
+        "diff": -12.97,
+        "pass": false
+      },
+      {
+        "target_angle": 1.25,
+        "line_count": 18,
+        "expected": 30.04,
+        "diff": -12.04,
+        "pass": false
+      },
+      {
+        "target_angle": 2.5,
+        "line_count": 19,
+        "expected": 30.15,
+        "diff": -11.15,
+        "pass": false
+      },
+      {
+        "target_angle": 3.75,
+        "line_count": 14,
+        "expected": 29.91,
+        "diff": -15.91,
+        "pass": false
+      },
+      {
+        "target_angle": 5.0,
+        "line_count": 21,
+        "expected": 33.0,
+        "diff": -12.0,
+        "pass": false
+      }
+    ],
+    "count_pass": false,
+    "ref_angle": -3.75,
+    "overlap_range": [
+      46.5,
+      2809.2
+    ],
+    "ref_grid_size": 19,
+    "align_max_px": 39.66,
+    "align_mean_px": 3.452,
+    "align_n_pairs": 114,
+    "align_pass": false,
+    "missing_peaks": [
+      {
+        "target_angle": -1.25,
+        "expected_pos": 88.67
+      },
+      {
+        "target_angle": -1.25,
+        "expected_pos": 180.47
+      },
+      {
+        "target_angle": -1.25,
+        "expected_pos": 336.12
+      },
+      {
+        "target_angle": -1.25,
+        "expected_pos": 1324.94
+      },
+      {
+        "target_angle": -1.25,
+        "expected_pos": 2712.89
+      },
+      {
+        "target_angle": 0.0,
+        "expected_pos": 140.55
+      },
+      {
+        "target_angle": 0.0,
+        "expected_pos": 180.47
+      },
+      {
+        "target_angle": 0.0,
+        "expected_pos": 1324.94
+      },
+      {
+        "target_angle": 0.0,
+        "expected_pos": 2712.89
+      },
+      {
+        "target_angle": 1.25,
+        "expected_pos": 88.67
+      },
+      {
+        "target_angle": 1.25,
+        "expected_pos": 1324.94
+      },
+      {
+        "target_angle": 1.25,
+        "expected_pos": 1426.72
+      },
+      {
+        "target_angle": 1.25,
+        "expected_pos": 2712.89
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 140.55
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 1324.94
+      },
+      {
+        "target_angle": 3.75,
+        "expected_pos": 88.67
+      },
+      {
+        "target_angle": 3.75,
+        "expected_pos": 140.55
+      },
+      {
+        "target_angle": 3.75,
+        "expected_pos": 180.47
+      },
+      {
+        "target_angle": 3.75,
+        "expected_pos": 336.12
+      },
+      {
+        "target_angle": 3.75,
+        "expected_pos": 1324.94
+      },
+      {
+        "target_angle": 3.75,
+        "expected_pos": 2645.03
+      },
+      {
+        "target_angle": 3.75,
+        "expected_pos": 2712.89
+      }
+    ],
+    "missing_count": 22
+  },
+  {
+    "image": "1_cor.png",
+    "axis": "h",
+    "pitch_values": [
+      62.5,
+      62.5,
+      62.5,
+      60.0,
+      62.0,
+      62.0,
+      62.0,
+      62.0
+    ],
+    "pitch_range_px": 2.5,
+    "pitch_pass": false,
+    "count_checks": [
+      {
+        "target_angle": -3.75,
+        "line_count": 9,
+        "expected": 44.43,
+        "diff": -35.43,
+        "pass": false
+      },
+      {
+        "target_angle": -2.5,
+        "line_count": 9,
+        "expected": 44.45,
+        "diff": -35.45,
+        "pass": false
+      },
+      {
+        "target_angle": -1.25,
+        "line_count": 9,
+        "expected": 44.43,
+        "diff": -35.43,
+        "pass": false
+      },
+      {
+        "target_angle": 0.0,
+        "line_count": 8,
+        "expected": 46.07,
+        "diff": -38.07,
+        "pass": false
+      },
+      {
+        "target_angle": 1.25,
+        "line_count": 9,
+        "expected": 45.11,
+        "diff": -36.11,
+        "pass": false
+      },
+      {
+        "target_angle": 2.5,
+        "line_count": 9,
+        "expected": 45.11,
+        "diff": -36.11,
+        "pass": false
+      },
+      {
+        "target_angle": 3.75,
+        "line_count": 9,
+        "expected": 45.11,
+        "diff": -36.11,
+        "pass": false
+      },
+      {
+        "target_angle": 5.0,
+        "line_count": 9,
+        "expected": 45.11,
+        "diff": -36.11,
+        "pass": false
+      }
+    ],
+    "count_pass": false,
+    "ref_angle": -3.75,
+    "overlap_range": [
+      793.9,
+      2752.6
+    ],
+    "ref_grid_size": 8,
+    "align_max_px": 14.12,
+    "align_mean_px": 7.632,
+    "align_n_pairs": 49,
+    "align_pass": false,
+    "missing_peaks": [
+      {
+        "target_angle": 0.0,
+        "expected_pos": 1315.78
+      }
+    ],
+    "missing_count": 1
+  },
+  {
+    "image": "2_cor.png",
+    "axis": "v",
+    "pitch_values": [
+      124.5,
+      114.0,
+      124.0,
+      124.0,
+      124.0,
+      125.0,
+      124.0,
+      124.0
+    ],
+    "pitch_range_px": 11.0,
+    "pitch_pass": false,
+    "count_checks": [
+      {
+        "target_angle": -3.75,
+        "line_count": 17,
+        "expected": 30.1,
+        "diff": -13.1,
+        "pass": false
+      },
+      {
+        "target_angle": -2.5,
+        "line_count": 21,
+        "expected": 32.87,
+        "diff": -11.87,
+        "pass": false
+      },
+      {
+        "target_angle": -1.25,
+        "line_count": 19,
+        "expected": 30.21,
+        "diff": -11.21,
+        "pass": false
+      },
+      {
+        "target_angle": 0.0,
+        "line_count": 18,
+        "expected": 30.09,
+        "diff": -12.09,
+        "pass": false
+      },
+      {
+        "target_angle": 1.25,
+        "line_count": 20,
+        "expected": 30.1,
+        "diff": -10.1,
+        "pass": false
+      },
+      {
+        "target_angle": 2.5,
+        "line_count": 14,
+        "expected": 29.94,
+        "diff": -15.94,
+        "pass": false
+      },
+      {
+        "target_angle": 3.75,
+        "line_count": 19,
+        "expected": 30.2,
+        "diff": -11.2,
+        "pass": false
+      },
+      {
+        "target_angle": 5.0,
+        "line_count": 20,
+        "expected": 30.22,
+        "diff": -10.22,
+        "pass": false
+      }
+    ],
+    "count_pass": false,
+    "ref_angle": -2.5,
+    "overlap_range": [
+      47.9,
+      2866.8
+    ],
+    "ref_grid_size": 19,
+    "align_max_px": 17.17,
+    "align_mean_px": 2.446,
+    "align_n_pairs": 115,
+    "align_pass": false,
+    "missing_peaks": [
+      {
+        "target_angle": -3.75,
+        "expected_pos": 85.2
+      },
+      {
+        "target_angle": -3.75,
+        "expected_pos": 164.13
+      },
+      {
+        "target_angle": -3.75,
+        "expected_pos": 1379.97
+      },
+      {
+        "target_angle": -3.75,
+        "expected_pos": 2773.64
+      },
+      {
+        "target_angle": -1.25,
+        "expected_pos": 85.2
+      },
+      {
+        "target_angle": -1.25,
+        "expected_pos": 164.13
+      },
+      {
+        "target_angle": 0.0,
+        "expected_pos": 1379.97
+      },
+      {
+        "target_angle": 0.0,
+        "expected_pos": 2773.64
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 85.2
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 124.17
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 164.13
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 334.97
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 1379.97
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 2702.72
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 2773.64
+      },
+      {
+        "target_angle": 3.75,
+        "expected_pos": 85.2
+      },
+      {
+        "target_angle": 3.75,
+        "expected_pos": 164.13
+      }
+    ],
+    "missing_count": 17
+  },
+  {
+    "image": "2_cor.png",
+    "axis": "h",
+    "pitch_values": [
+      170.0,
+      170.0,
+      170.0,
+      285.0,
+      169.0,
+      169.0,
+      170.0,
+      170.0
+    ],
+    "pitch_range_px": 116.0,
+    "pitch_pass": false,
+    "count_checks": [
+      {
+        "target_angle": -3.75,
+        "line_count": 6,
+        "expected": 16.33,
+        "diff": -10.33,
+        "pass": false
+      },
+      {
+        "target_angle": -2.5,
+        "line_count": 6,
+        "expected": 16.34,
+        "diff": -10.34,
+        "pass": false
+      },
+      {
+        "target_angle": -1.25,
+        "line_count": 6,
+        "expected": 16.33,
+        "diff": -10.33,
+        "pass": false
+      },
+      {
+        "target_angle": 0.0,
+        "line_count": 4,
+        "expected": 9.69,
+        "diff": -5.69,
+        "pass": false
+      },
+      {
+        "target_angle": 1.25,
+        "line_count": 6,
+        "expected": 16.55,
+        "diff": -10.55,
+        "pass": false
+      },
+      {
+        "target_angle": 2.5,
+        "line_count": 6,
+        "expected": 16.55,
+        "diff": -10.55,
+        "pass": false
+      },
+      {
+        "target_angle": 3.75,
+        "line_count": 6,
+        "expected": 16.45,
+        "diff": -10.45,
+        "pass": false
+      },
+      {
+        "target_angle": 5.0,
+        "line_count": 6,
+        "expected": 16.45,
+        "diff": -10.45,
+        "pass": false
+      }
+    ],
+    "count_pass": false,
+    "ref_angle": -3.75,
+    "overlap_range": [
+      793.0,
+      2752.5
+    ],
+    "ref_grid_size": 5,
+    "align_max_px": 14.735,
+    "align_mean_px": 7.818,
+    "align_n_pairs": 27,
+    "align_pass": false,
+    "missing_peaks": [
+      {
+        "target_angle": 0.0,
+        "expected_pos": 1016.5
+      },
+      {
+        "target_angle": 0.0,
+        "expected_pos": 2441.44
+      }
+    ],
+    "missing_count": 2
+  },
+  {
+    "image": "3_cor.png",
+    "axis": "v",
+    "pitch_values": [
+      124.0,
+      114.5,
+      114.5,
+      124.0,
+      115.5,
+      115.0,
+      114.5,
+      124.0
+    ],
+    "pitch_range_px": 9.5,
+    "pitch_pass": false,
+    "count_checks": [
+      {
+        "target_angle": -3.75,
+        "line_count": 19,
+        "expected": 30.22,
+        "diff": -11.22,
+        "pass": false
+      },
+      {
+        "target_angle": -2.5,
+        "line_count": 21,
+        "expected": 32.72,
+        "diff": -11.72,
+        "pass": false
+      },
+      {
+        "target_angle": -1.25,
+        "line_count": 21,
+        "expected": 32.71,
+        "diff": -11.71,
+        "pass": false
+      },
+      {
+        "target_angle": 0.0,
+        "line_count": 17,
+        "expected": 30.1,
+        "diff": -13.1,
+        "pass": false
+      },
+      {
+        "target_angle": 1.25,
+        "line_count": 21,
+        "expected": 32.31,
+        "diff": -11.31,
+        "pass": false
+      },
+      {
+        "target_angle": 2.5,
+        "line_count": 21,
+        "expected": 32.52,
+        "diff": -11.52,
+        "pass": false
+      },
+      {
+        "target_angle": 3.75,
+        "line_count": 21,
+        "expected": 32.7,
+        "diff": -11.7,
+        "pass": false
+      },
+      {
+        "target_angle": 5.0,
+        "line_count": 19,
+        "expected": 30.23,
+        "diff": -11.23,
+        "pass": false
+      }
+    ],
+    "count_pass": false,
+    "ref_angle": -2.5,
+    "overlap_range": [
+      48.1,
+      2776.1
+    ],
+    "ref_grid_size": 19,
+    "align_max_px": 22.095,
+    "align_mean_px": 2.495,
+    "align_n_pairs": 127,
+    "align_pass": false,
+    "missing_peaks": [
+      {
+        "target_angle": -3.75,
+        "expected_pos": 85.2
+      },
+      {
+        "target_angle": -3.75,
+        "expected_pos": 162.13
+      },
+      {
+        "target_angle": 0.0,
+        "expected_pos": 162.13
+      },
+      {
+        "target_angle": 0.0,
+        "expected_pos": 1288.06
+      },
+      {
+        "target_angle": 0.0,
+        "expected_pos": 2681.74
+      },
+      {
+        "target_angle": 5.0,
+        "expected_pos": 85.2
+      },
+      {
+        "target_angle": 5.0,
+        "expected_pos": 162.13
+      }
+    ],
+    "missing_count": 7
+  },
+  {
+    "image": "3_cor.png",
+    "axis": "h",
+    "pitch_values": [
+      309.5,
+      310.0,
+      168.5,
+      66.0,
+      171.0,
+      171.0,
+      171.0,
+      310.0
+    ],
+    "pitch_range_px": 244.0,
+    "pitch_pass": false,
+    "count_checks": [
+      {
+        "target_angle": -3.75,
+        "line_count": 5,
+        "expected": 8.97,
+        "diff": -3.97,
+        "pass": false
+      },
+      {
+        "target_angle": -2.5,
+        "line_count": 5,
+        "expected": 8.96,
+        "diff": -3.96,
+        "pass": false
+      },
+      {
+        "target_angle": -1.25,
+        "line_count": 7,
+        "expected": 16.48,
+        "diff": -9.48,
+        "pass": false
+      },
+      {
+        "target_angle": 0.0,
+        "line_count": 10,
+        "expected": 41.86,
+        "diff": -31.86,
+        "pass": false
+      },
+      {
+        "target_angle": 1.25,
+        "line_count": 6,
+        "expected": 16.36,
+        "diff": -10.36,
+        "pass": false
+      },
+      {
+        "target_angle": 2.5,
+        "line_count": 6,
+        "expected": 16.36,
+        "diff": -10.36,
+        "pass": false
+      },
+      {
+        "target_angle": 3.75,
+        "line_count": 6,
+        "expected": 16.36,
+        "diff": -10.36,
+        "pass": false
+      },
+      {
+        "target_angle": 5.0,
+        "line_count": 5,
+        "expected": 9.02,
+        "diff": -4.02,
+        "pass": false
+      }
+    ],
+    "count_pass": false,
+    "ref_angle": 0.0,
+    "overlap_range": [
+      793.0,
+      2752.5
+    ],
+    "ref_grid_size": 8,
+    "align_max_px": 12.035,
+    "align_mean_px": 4.201,
+    "align_n_pairs": 28,
+    "align_pass": false,
+    "missing_peaks": [
+      {
+        "target_angle": -3.75,
+        "expected_pos": 836.56
+      },
+      {
+        "target_angle": -3.75,
+        "expected_pos": 959.56
+      },
+      {
+        "target_angle": -3.75,
+        "expected_pos": 1010.56
+      },
+      {
+        "target_angle": -3.75,
+        "expected_pos": 2598.53
+      },
+      {
+        "target_angle": -3.75,
+        "expected_pos": 2712.53
+      },
+      {
+        "target_angle": -2.5,
+        "expected_pos": 836.56
+      },
+      {
+        "target_angle": -2.5,
+        "expected_pos": 959.56
+      },
+      {
+        "target_angle": -2.5,
+        "expected_pos": 1010.56
+      },
+      {
+        "target_angle": -2.5,
+        "expected_pos": 2598.53
+      },
+      {
+        "target_angle": -2.5,
+        "expected_pos": 2712.53
+      },
+      {
+        "target_angle": -1.25,
+        "expected_pos": 836.56
+      },
+      {
+        "target_angle": -1.25,
+        "expected_pos": 959.56
+      },
+      {
+        "target_angle": -1.25,
+        "expected_pos": 2712.53
+      },
+      {
+        "target_angle": 1.25,
+        "expected_pos": 836.56
+      },
+      {
+        "target_angle": 1.25,
+        "expected_pos": 959.56
+      },
+      {
+        "target_angle": 1.25,
+        "expected_pos": 1010.56
+      },
+      {
+        "target_angle": 1.25,
+        "expected_pos": 2712.53
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 836.56
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 959.56
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 1010.56
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 2712.53
+      },
+      {
+        "target_angle": 3.75,
+        "expected_pos": 836.56
+      },
+      {
+        "target_angle": 3.75,
+        "expected_pos": 959.56
+      },
+      {
+        "target_angle": 3.75,
+        "expected_pos": 1010.56
+      },
+      {
+        "target_angle": 3.75,
+        "expected_pos": 2712.53
+      },
+      {
+        "target_angle": 5.0,
+        "expected_pos": 836.56
+      },
+      {
+        "target_angle": 5.0,
+        "expected_pos": 959.56
+      },
+      {
+        "target_angle": 5.0,
+        "expected_pos": 1010.56
+      },
+      {
+        "target_angle": 5.0,
+        "expected_pos": 2598.53
+      },
+      {
+        "target_angle": 5.0,
+        "expected_pos": 2712.53
+      }
+    ],
+    "missing_count": 30
+  },
+  {
+    "image": "4_cor.png",
+    "axis": "v",
+    "pitch_values": [
+      114.5,
+      124.5,
+      124.0,
+      124.0,
+      124.0,
+      125.0,
+      114.0,
+      124.0
+    ],
+    "pitch_range_px": 11.0,
+    "pitch_pass": false,
+    "count_checks": [
+      {
+        "target_angle": -3.75,
+        "line_count": 21,
+        "expected": 32.72,
+        "diff": -11.72,
+        "pass": false
+      },
+      {
+        "target_angle": -2.5,
+        "line_count": 17,
+        "expected": 30.09,
+        "diff": -13.09,
+        "pass": false
+      },
+      {
+        "target_angle": -1.25,
+        "line_count": 20,
+        "expected": 30.19,
+        "diff": -10.19,
+        "pass": false
+      },
+      {
+        "target_angle": 0.0,
+        "line_count": 18,
+        "expected": 30.08,
+        "diff": -12.08,
+        "pass": false
+      },
+      {
+        "target_angle": 1.25,
+        "line_count": 20,
+        "expected": 30.07,
+        "diff": -10.07,
+        "pass": false
+      },
+      {
+        "target_angle": 2.5,
+        "line_count": 14,
+        "expected": 29.91,
+        "diff": -15.91,
+        "pass": false
+      },
+      {
+        "target_angle": 3.75,
+        "line_count": 21,
+        "expected": 32.84,
+        "diff": -11.84,
+        "pass": false
+      },
+      {
+        "target_angle": 5.0,
+        "line_count": 19,
+        "expected": 30.23,
+        "diff": -11.23,
+        "pass": false
+      }
+    ],
+    "count_pass": false,
+    "ref_angle": -3.75,
+    "overlap_range": [
+      47.7,
+      2954.6
+    ],
+    "ref_grid_size": 19,
+    "align_max_px": 23.335,
+    "align_mean_px": 2.926,
+    "align_n_pairs": 116,
+    "align_pass": false,
+    "missing_peaks": [
+      {
+        "target_angle": -2.5,
+        "expected_pos": 93.72
+      },
+      {
+        "target_angle": -2.5,
+        "expected_pos": 187.52
+      },
+      {
+        "target_angle": -2.5,
+        "expected_pos": 1467.7
+      },
+      {
+        "target_angle": -2.5,
+        "expected_pos": 2858.63
+      },
+      {
+        "target_angle": -1.25,
+        "expected_pos": 187.52
+      },
+      {
+        "target_angle": 0.0,
+        "expected_pos": 1467.7
+      },
+      {
+        "target_angle": 0.0,
+        "expected_pos": 2858.63
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 93.72
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 136.63
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 187.52
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 337.19
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 1467.7
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 2789.78
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 2858.63
+      },
+      {
+        "target_angle": 3.75,
+        "expected_pos": 136.63
+      },
+      {
+        "target_angle": 5.0,
+        "expected_pos": 187.52
+      }
+    ],
+    "missing_count": 16
+  },
+  {
+    "image": "4_cor.png",
+    "axis": "h",
+    "pitch_values": [
+      167.0,
+      167.0,
+      167.0,
+      61.5,
+      306.5,
+      306.0,
+      305.5,
+      306.5
+    ],
+    "pitch_range_px": 245.0,
+    "pitch_pass": false,
+    "count_checks": [
+      {
+        "target_angle": -3.75,
+        "line_count": 6,
+        "expected": 16.62,
+        "diff": -10.62,
+        "pass": false
+      },
+      {
+        "target_angle": -2.5,
+        "line_count": 6,
+        "expected": 16.63,
+        "diff": -10.63,
+        "pass": false
+      },
+      {
+        "target_angle": -1.25,
+        "line_count": 6,
+        "expected": 16.62,
+        "diff": -10.62,
+        "pass": false
+      },
+      {
+        "target_angle": 0.0,
+        "line_count": 9,
+        "expected": 44.91,
+        "diff": -35.91,
+        "pass": false
+      },
+      {
+        "target_angle": 1.25,
+        "line_count": 5,
+        "expected": 9.13,
+        "diff": -4.13,
+        "pass": false
+      },
+      {
+        "target_angle": 2.5,
+        "line_count": 5,
+        "expected": 9.14,
+        "diff": -4.14,
+        "pass": false
+      },
+      {
+        "target_angle": 3.75,
+        "line_count": 5,
+        "expected": 9.16,
+        "diff": -4.16,
+        "pass": false
+      },
+      {
+        "target_angle": 5.0,
+        "line_count": 5,
+        "expected": 9.13,
+        "diff": -4.13,
+        "pass": false
+      }
+    ],
+    "count_pass": false,
+    "ref_angle": 0.0,
+    "overlap_range": [
+      793.0,
+      2753.6
+    ],
+    "ref_grid_size": 7,
+    "align_max_px": 10.94,
+    "align_mean_px": 4.288,
+    "align_n_pairs": 26,
+    "align_pass": false,
+    "missing_peaks": [
+      {
+        "target_angle": -3.75,
+        "expected_pos": 836.56
+      },
+      {
+        "target_angle": -3.75,
+        "expected_pos": 959.56
+      },
+      {
+        "target_angle": -3.75,
+        "expected_pos": 2712.53
+      },
+      {
+        "target_angle": -2.5,
+        "expected_pos": 836.56
+      },
+      {
+        "target_angle": -2.5,
+        "expected_pos": 959.56
+      },
+      {
+        "target_angle": -2.5,
+        "expected_pos": 2712.53
+      },
+      {
+        "target_angle": -1.25,
+        "expected_pos": 836.56
+      },
+      {
+        "target_angle": -1.25,
+        "expected_pos": 959.56
+      },
+      {
+        "target_angle": -1.25,
+        "expected_pos": 2712.53
+      },
+      {
+        "target_angle": 1.25,
+        "expected_pos": 836.56
+      },
+      {
+        "target_angle": 1.25,
+        "expected_pos": 959.56
+      },
+      {
+        "target_angle": 1.25,
+        "expected_pos": 1011.56
+      },
+      {
+        "target_angle": 1.25,
+        "expected_pos": 2712.53
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 836.56
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 959.56
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 1011.56
+      },
+      {
+        "target_angle": 2.5,
+        "expected_pos": 2712.53
+      },
+      {
+        "target_angle": 3.75,
+        "expected_pos": 836.56
+      },
+      {
+        "target_angle": 3.75,
+        "expected_pos": 959.56
+      },
+      {
+        "target_angle": 3.75,
+        "expected_pos": 1011.56
+      },
+      {
+        "target_angle": 3.75,
+        "expected_pos": 2712.53
+      },
+      {
+        "target_angle": 5.0,
+        "expected_pos": 836.56
+      },
+      {
+        "target_angle": 5.0,
+        "expected_pos": 959.56
+      },
+      {
+        "target_angle": 5.0,
+        "expected_pos": 1011.56
+      },
+      {
+        "target_angle": 5.0,
+        "expected_pos": 2712.53
+      }
+    ],
+    "missing_count": 25
+  }
+]
