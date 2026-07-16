@@ -77,7 +77,9 @@ def _serve_client(conn: socket.socket, dispatcher: Dispatcher, logger) -> bool:
             req = P.parse_request(text)
         except P.ProtocolError as e:
             logger.warning("bad request: [%d] %s", e.code, e.msg)
-            _send(conn, P.build_error_response(None, e.code, e.msg), logger)
+            # e.req：該行解得出合法 request_id 時原樣回填（PROTOCOL.md §1），
+            # 否則 LabVIEW 會因 request_id 不符丟棄這行錯誤回應、等到 timeout
+            _send(conn, P.build_error_response(e.req, e.code, e.msg), logger)
             continue
 
         resp, shutdown = dispatcher.handle(req)

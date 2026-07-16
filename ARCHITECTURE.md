@@ -289,7 +289,7 @@ S_ROI(0) → S_ANGLE(1) → S_GEOM(2) → S_LINES(3) → S_BREAKS(4) → S_CLEAN
 | 環節 | 內容 |
 |---|---|
 | 開發環境 | 開發機台直接測試；此機另有專案的 LabVIEW 綁定系統 Python 3.6，**不可動**（見 1.3） |
-| 實圖來源 | 原機台取像下載，統一放 `vision_engine_py/testdata/`（已 .gitignore，不進版本庫）；新片型影像先進調機工具用發現式看結果 |
+| 實圖來源 | 原機台取像下載，統一放 `vision_engine_py/testdata/`（已 .gitignore，不進版本庫）；**測試一律用 testdata/ 內影像，不得引用專案外資料夾**（如 `測試\劃片後檢\backlightTest\…`）；新片型影像先進調機工具用發現式看結果 |
 | 改程式後必跑 | `venv\Scripts\python -m pytest tests -q`；動到 ve_server 的加跑 `test_client.py` 實測行尾 |
 | 變更類型 × 驗證 | 演算法 → 單元＋golden 特徵化；協定/server → 特徵化＋test_client.py；UI → session 測試＋手動操作 |
 | golden 重錄時機 | 只有「演算法行為**刻意**改變」才重錄（`tests/record_golden.py`）；重錄前先確認與舊行為的差異是預期的 |

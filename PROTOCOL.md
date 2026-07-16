@@ -8,6 +8,7 @@
 - Client 送出的字串欄位（檔名、路徑、piece_id、recipe_name）**只允許 ASCII**；LabVIEW 端 `ENG_Start.vi` 送出前強制檢查，engine 端收到非 ASCII 回 `error_code=122`。
 - 一問一答、循序處理：client 送一行指令，engine 處理完回一行回應。LabVIEW 以 200ms TCP Read 輪詢，timeout(56) 視為 Pending。
 - `request_id` 由 LabVIEW 發號（建議格式 `REQ-000123`），engine **原樣回填**。LabVIEW 收到不符的 request_id 應丟棄該行繼續等（error 5401 情境）。
+- 請求解析失敗（未知 cmd、欄位錯誤等）時，只要該行 JSON 仍能解出合法的 `request_id` 字串，錯誤回應**同樣原樣回填**；整行壞損無法解出時（bad JSON、request_id 缺漏/型別錯誤）才回 `request_id: ""`（此情況 LabVIEW 端本就對不上號，以 timeout 處理）。
 
 ## 2. 指令總覽
 

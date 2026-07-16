@@ -165,6 +165,79 @@ def test_request_id_fillback():
     assert err_resp_none["request_id"] == ""
 
 
+class _FakeConn:
+    """假 socket：一次餵入固定 bytes，收集 server 送出的 bytes。"""
+
+    def __init__(self, rx: bytes):
+        self._rx = rx
+        self.sent = b""
+
+    def recv(self, n):
+        chunk, self._rx = self._rx[:n], self._rx[n:]
+        return chunk  # 餵完回 b""，_serve_client 視為 client 斷線
+
+    def sendall(self, data):
+        self.sent += data
+
+
+def _serve_lines(raw: bytes):
+    """把 raw bytes 餵進真正的 server 路徑（_serve_client），回傳解析後的回應列表。"""
+    from ve_server.dispatcher import Dispatcher
+    from ve_server.server import _serve_client
+
+    cfg = {
+        "host": "127.0.0.1",
+        "port": 5710,
+        "ng_dir": "MOCK/ng",
+        "algo": {},
+        "cleanup_on_inspect": False,
+    }
+    conn = _FakeConn(raw)
+    shutdown = _serve_client(conn, Dispatcher(cfg, logging.getLogger("test_server"), mock=True),
+                             logging.getLogger("test_server"))
+    assert shutdown is False
+
+    lines = conn.sent.split(b"\r\n")
+    assert lines[-1] == b""  # 每行回應都以 \r\n 結尾
+    return [json.loads(line) for line in lines[:-1]]
+
+
+def test_parse_error_request_id_fillback_via_server():
+    """
+    5b. parse 失敗時的 request_id 回填，走真正的 server 路徑（_serve_client）：
+        - 該行仍解得出合法 request_id（未知 cmd、欄位錯誤）→ 原樣回填
+        - 整行壞損（bad JSON、缺 request_id）→ 回空字串
+    """
+    responses = _serve_lines(
+        b'{"request_id":"REQ-3001","cmd":"fly_to_moon"}\r\n'
+        b'{"request_id":"REQ-3002","cmd":123}\r\n'
+        b'{invalid json}\r\n'
+        b'{"cmd":"ping"}\r\n'
+    )
+    assert len(responses) == 4
+    unknown_cmd, bad_cmd_type, bad_json, missing_rid = responses
+
+    # 未知 cmd：request_id 必須原樣回填（PROTOCOL.md §1），否則 LabVIEW 端
+    # 會把這行錯誤回應當 request_id 不符丟棄，卡到 timeout 才報 5401
+    assert unknown_cmd["status"] == P.S_ENGINE_ERROR
+    assert unknown_cmd["error_code"] == P.E_UNKNOWN_CMD  # 121
+    assert unknown_cmd["request_id"] == "REQ-3001"
+    assert unknown_cmd["cmd"] == "fly_to_moon"
+
+    # cmd 型別錯誤：request_id 回填；cmd 非字串不得原樣塞回（回應須全 ASCII 字串欄位）
+    assert bad_cmd_type["error_code"] == P.E_BAD_FIELD  # 122
+    assert bad_cmd_type["request_id"] == "REQ-3002"
+    assert bad_cmd_type["cmd"] == ""
+
+    # bad JSON：解不出 request_id，回空字串
+    assert bad_json["error_code"] == P.E_BAD_JSON  # 120
+    assert bad_json["request_id"] == ""
+
+    # 缺 request_id：無合法值可回填，回空字串
+    assert missing_rid["error_code"] == P.E_BAD_FIELD  # 122
+    assert missing_rid["request_id"] == ""
+
+
 def test_mock_dispatcher_rotation_and_no_cv2():
     """
     6. mock 模式 dispatcher 的 verdict 輪替，且 mock 路徑不 import cv2
