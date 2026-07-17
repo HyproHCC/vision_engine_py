@@ -141,3 +141,36 @@ def test_roundtrip_taught_params(teach_ok):
     ref = json.loads(json.dumps(teach_ok["taught_params"]))
     ref["reference"].pop("taught_at")
     assert d == ref
+
+
+def test_protocol_security_image_extension():
+    """安全增強測試：驗證協定層對非影像副檔名之輸入進行封鎖"""
+    from ve_server.protocol import parse_request, ProtocolError, E_BAD_FIELD
+    import json
+
+    # 1. 正常的影像路徑應解析成功
+    ok_req = {
+        "request_id": "REQ-000001",
+        "cmd": "inspect",
+        "image_path": "D:/VisionWork/img.png",
+        "roi_mode": "AutoFrame",
+        "angle_tol_deg": 5.0,
+        "param_source": "None"
+    }
+    parsed = parse_request(json.dumps(ok_req))
+    assert parsed["image_path"] == "D:/VisionWork/img.png"
+
+    # 2. 惡意的/不符影像副檔名的路徑應被擋下並丟出 E_BAD_FIELD 錯誤
+    for bad_ext in ("test.txt", "C:/Windows/win.ini", "/etc/passwd", "test.png.txt"):
+        bad_req = {
+            "request_id": "REQ-000002",
+            "cmd": "inspect",
+            "image_path": bad_ext,
+            "roi_mode": "AutoFrame",
+            "angle_tol_deg": 5.0,
+            "param_source": "None"
+        }
+        with pytest.raises(ProtocolError) as excinfo:
+            parse_request(json.dumps(bad_req))
+        assert excinfo.value.code == E_BAD_FIELD
+        assert "invalid image extension" in excinfo.value.msg
