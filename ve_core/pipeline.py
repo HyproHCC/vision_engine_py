@@ -146,12 +146,20 @@ def build_family_geometry(gray: np.ndarray, axis: str, angle_deg: float,
                           rot=rot, M=M, Minv=Minv, region=region)
 
 
+def _dark_line_view(sub: np.ndarray) -> np.ndarray:
+    """切割線在實機影像上是暗線；反相成亮線後交給既有「亮線」演算法
+    （ridge_bandpass / band_profile / find_dark_runs 皆不改）。
+    唯一反相入口，同時對 discovery / taught / inspect / teach 生效
+    （ARCHITECTURE.md 3.2）。"""
+    return 255 - sub
+
+
 def find_family_lines(geom: FamilyGeometry, cfg: AlgoConfig,
                       taught: TaughtParams = None):
     """找線。回傳 {'positions': [...], 'pitch_px': f, 'mode': str}；
     該族無線（taught 中無此 axis / 發現式找不到）回 None。
     taught 模式定位失敗丟 LinesNotFound（驗證式的失敗是硬錯誤）。"""
-    sub = geom.sub
+    sub = _dark_line_view(geom.sub)
     if taught is not None:
         fam = taught.family(geom.axis)
         if fam is None:
@@ -181,7 +189,7 @@ def detect_family_breaks(geom: FamilyGeometry, positions: list,
                          line_id_start: int) -> list:
     """單族斷點偵測，回傳 list[BreakDefect]（原圖座標）。
     line_id 自 line_id_start+1 起連續編號（跨族累計由呼叫端負責）。"""
-    sub = geom.sub
+    sub = _dark_line_view(geom.sub)
     ax0, ay0 = geom.region.x, geom.region.y
     defects = []
     lid = line_id_start
