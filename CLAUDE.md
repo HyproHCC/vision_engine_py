@@ -28,5 +28,6 @@ python test_client.py demo                      REM server 端到端實測（含
 
 
 ## 測試資料
+- **測試圖片一律用 `testdata/`**；不得再引用專案外資料夾（如 `測試\劃片後檢\backlightTest\0709LowLight\50k`），需要的實圖先收進 testdata/ 再用。
 - 實圖:testdata/real/(有角度變化,h/v 兩族線)
 - **testdata/ 內是 3840×2748 大圖，沒有明確需要不得用 Read 開圖檔**（一張圖吃掉大量 token）；需要看內容時用腳本讀取數值或縮圖後再看。

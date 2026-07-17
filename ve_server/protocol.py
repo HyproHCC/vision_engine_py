@@ -40,10 +40,12 @@ class ProtocolError(Exception):
         super().__init__(msg)
         self.code = code
         self.msg = msg
+        self.req = None  # 已解出合法 request_id 的 request dict；供錯誤回應回填
 
 
 def parse_request(line: str) -> dict:
-    """解析一行請求。失敗丟 ProtocolError。"""
+    """解析一行請求。失敗丟 ProtocolError；若該行已能解出合法 request_id，
+    附於 e.req，讓錯誤回應仍能原樣回填（PROTOCOL.md §1）。"""
     try:
         req = json.loads(line)
     except Exception as e:
@@ -53,6 +55,15 @@ def parse_request(line: str) -> dict:
 
     if "request_id" not in req or not isinstance(req["request_id"], str):
         raise ProtocolError(E_BAD_FIELD, "missing/invalid request_id")
+    try:
+        _validate_fields(req)
+    except ProtocolError as e:
+        e.req = req
+        raise
+    return req
+
+
+def _validate_fields(req: dict):
     cmd = req.get("cmd")
     if not isinstance(cmd, str):
         raise ProtocolError(E_BAD_FIELD, "missing/invalid cmd")
@@ -87,14 +98,14 @@ def parse_request(line: str) -> dict:
         ps = req.get("param_source", "None")
         if ps not in ("None", "Taught", "Manual"):
             raise ProtocolError(E_BAD_FIELD, "param_source must be None|Taught|Manual")
-    return req
 
 
 def build_response(req: dict, status: str, error_code: int = E_OK,
                    error_msg: str = "", t_start: float = None, **extra) -> dict:
+    cmd = req.get("cmd", "")
     resp = {
         "request_id": req.get("request_id", ""),
-        "cmd": req.get("cmd", ""),
+        "cmd": cmd if isinstance(cmd, str) else "",
         "status": status,
         "error_code": error_code,
         "error_msg": error_msg,
