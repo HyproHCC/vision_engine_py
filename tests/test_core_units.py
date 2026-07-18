@@ -343,3 +343,33 @@ def test_family_detection_break_lengths_px_defaults_empty_for_teach():
                       angle_tol_deg=5.0, image_name="ok.png")
     assert isinstance(r, ve_core.TeachResult)
     assert all(f.break_lengths_px == [] for f in r.families)
+
+
+# --------------------------------------- 需求：安全輸入驗證 (image_path)
+def test_protocol_parse_request_image_path_validation():
+    import json
+    from ve_server.protocol import parse_request, ProtocolError, E_BAD_FIELD
+
+    # 合法的影像檔名/路徑應通過驗證
+    valid_reqs = [
+        {"request_id": "REQ-01", "cmd": "inspect", "image_path": "test.png"},
+        {"request_id": "REQ-02", "cmd": "inspect", "image_path": "C:/images/test.BMP"},
+        {"request_id": "REQ-03", "cmd": "teach", "image_path": "/var/tmp/img.jpeg"},
+        {"request_id": "REQ-04", "cmd": "inspect", "image_path": "sub/dir/pic.tiff"},
+    ]
+    for r in valid_reqs:
+        parsed = parse_request(json.dumps(r))
+        assert parsed["image_path"] == r["image_path"]
+
+    # 不合法的副檔名或嘗試目錄遍歷敏感檔案應被拒絕
+    invalid_reqs = [
+        {"request_id": "REQ-05", "cmd": "inspect", "image_path": "/etc/passwd"},
+        {"request_id": "REQ-06", "cmd": "inspect", "image_path": "../config.json"},
+        {"request_id": "REQ-07", "cmd": "teach", "image_path": "malicious.sh"},
+        {"request_id": "REQ-08", "cmd": "inspect", "image_path": "test.png.txt"},
+    ]
+    for r in invalid_reqs:
+        with pytest.raises(ProtocolError) as exc_info:
+            parse_request(json.dumps(r))
+        assert exc_info.value.code == E_BAD_FIELD
+        assert "invalid image_path: extension not allowed" in exc_info.value.msg
