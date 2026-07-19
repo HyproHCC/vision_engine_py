@@ -127,6 +127,101 @@ def _spacing_dispersion(diffs: np.ndarray) -> float:
     return float(mad / med)
 
 
+def _fill_pitch_gaps(proj: np.ndarray, peaks: list, pitch: float,
+                     initial_peaks: list, min_pitch: int,
+                     dispersion_th: float,
+                     mad_k_gap: float = 4.5,
+                     step_tol: float = 0.12,
+                     match_win_ratio: float = 0.1,
+                     max_gap_div: int = 16) -> tuple:
+    """已知週期缺口內補找漏峰（h 族折半漏線，buglist 12）。
+
+    根因：find_peaks 的平滑窗跟著 min_dist 走（min_dist//8），初始寬鬆
+    偵測（k=3）抓得到的雙峰切割道，在 min_dist 收斂後（k=9 起）被重平滑
+    壓低、剛好跌破 MAD 門檻——是漏峰不是子週期誤判。全域調低 mad_k
+    已實驗否決（v 族雜訊復發），只能在「有規律週期佐證的缺口」內局部處理。
+
+    作法：對相鄰峰間距 ≈ m×pitch（m≥2）的缺口，把缺口均分成 m 段，
+    在每個預期位置 ±win 內依序用兩層標準採認漏峰：
+      (1) 初始寬鬆偵測已找到的峰（已通過完整 mad_k 門檻，零新門檻）；
+      (2) 初始平滑尺度下的局部極大值 + 局部放寬門檻（mad_k_gap，
+          僅作用於缺口內，不動全域門檻）。
+    pitch 假說一律先用呼叫端量到的最終 pitch；僅當最終峰集本身不規律
+    （離散度 > dispersion_th，代表既有收斂/合併邏輯已失敗）才追加初始
+    峰間距中位數當第二假說（處理整族折半、最終 pitch 量成雜訊值的情形）
+    ——規律結果永遠不會被可能是子週期的初始 pitch 重切（保護 buglist 11
+    的修復）。補完後整組間距離散度必須 ≤ dispersion_th，否則整批放棄：
+    錯誤假說補出來的峰不會落在規律網格上，這是最後一道自檢。
+
+    回傳 (pitch, peaks)；沒有可補的缺口或自檢不過時原樣返回。
+    """
+    if len(peaks) < 2 or pitch is None or pitch <= 0:
+        return pitch, peaks
+    diffs = np.diff(peaks)
+    disp_final = _spacing_dispersion(diffs)
+
+    hypotheses = [float(pitch)]
+    if disp_final > dispersion_th and len(initial_peaks) >= 2:
+        init_pitch = float(np.median(np.diff(initial_peaks)))
+        if init_pitch >= min_pitch and init_pitch < 0.8 * pitch:
+            hypotheses.append(init_pitch)
+
+    sm = _smooth(proj, max(3, min_pitch // 8))
+    med = np.median(sm)
+    mad = np.median(np.abs(sm - med)) * 1.4826
+    gap_th = med + max(mad, 1e-9) * mad_k_gap
+    init_arr = np.asarray(initial_peaks, dtype=np.float64)
+
+    best = None  # (disp_after, filled_peaks)
+    for hyp in hypotheses:
+        win = max(4.0, hyp * match_win_ratio)
+        added = []
+        for a, b in zip(peaks[:-1], peaks[1:]):
+            gap = float(b - a)
+            m = int(round(gap / hyp))
+            if m < 2 or m > max_gap_div:
+                continue
+            step = gap / m
+            if abs(step - hyp) > step_tol * hyp:
+                continue
+            for j in range(1, m):
+                e = a + j * step
+                cand = None
+                # (1) 初始寬鬆偵測的峰（已通過完整門檻）
+                if len(init_arr):
+                    k = int(np.argmin(np.abs(init_arr - e)))
+                    if abs(init_arr[k] - e) <= win:
+                        cand = int(init_arr[k])
+                # (2) 缺口內局部放寬門檻
+                if cand is None:
+                    lo = max(1, int(e - win))
+                    hi = min(len(sm) - 1, int(e + win) + 1)
+                    if hi > lo:
+                        i = lo + int(np.argmax(sm[lo:hi]))
+                        if (sm[i] >= sm[i - 1] and sm[i] > sm[i + 1]
+                                and sm[i] > gap_th):
+                            cand = i
+                if cand is None:
+                    continue
+                # 與既有/已補峰保持最小間隔，避免重複或近鄰
+                if min(abs(cand - q) for q in peaks) < 0.5 * hyp:
+                    continue
+                if added and min(abs(cand - q) for q in added) < 0.5 * hyp:
+                    continue
+                added.append(cand)
+        if not added:
+            continue
+        filled = sorted(set(int(p) for p in peaks) | set(added))
+        disp_after = _spacing_dispersion(np.diff(filled))
+        if disp_after <= dispersion_th and (best is None or disp_after < best[0]):
+            best = (disp_after, filled)
+
+    if best is None:
+        return pitch, peaks
+    filled = best[1]
+    return float(np.median(np.diff(filled))), filled
+
+
 def estimate_pitch_from_peaks(proj: np.ndarray, min_pitch: int,
                               peak_min_dist_ratio: float = 0.6,
                               max_multiplier: int = 4,
@@ -147,10 +242,15 @@ def estimate_pitch_from_peaks(proj: np.ndarray, min_pitch: int,
     時無法可靠評估離散度，直接跳過，避免把訊號稀疏的情形誤判成「更
     規律」而過度合併，把本來分開的真實相鄰線併掉。找不到更規律的候選
     時保留收斂後的原始峰——這個門檻同時保護「本來就正常」的案例不被
-    誤動。"""
-    peaks = find_peaks(proj, min_dist=min_pitch)
-    if len(peaks) < 2:
-        return None, peaks
+    誤動。
+
+    最後一律過 _fill_pitch_gaps：min_dist 收斂會放大 find_peaks 的
+    平滑窗，門檻邊緣的真實線峰可能被重平滑壓掉（h 族折半漏線，
+    buglist 12），在 ≈ 整數倍 pitch 的缺口內把漏峰補回來。"""
+    initial_peaks = find_peaks(proj, min_dist=min_pitch)
+    if len(initial_peaks) < 2:
+        return None, initial_peaks
+    peaks = initial_peaks
     pitch = float(np.median(np.diff(peaks)))
 
     # 用量到的 pitch 收斂 min_dist，濾掉可能混進的雜訊近鄰峰後重找一次
@@ -160,25 +260,26 @@ def estimate_pitch_from_peaks(proj: np.ndarray, min_pitch: int,
         pitch = float(np.median(np.diff(peaks)))
 
     diffs = np.diff(peaks)
-    if len(peaks) < min_peaks_for_merge or _spacing_dispersion(diffs) <= dispersion_th:
-        return pitch, peaks
+    if len(peaks) >= min_peaks_for_merge and _spacing_dispersion(diffs) > dispersion_th:
+        best_peaks, best_pitch = peaks, pitch
+        best_disp = _spacing_dispersion(diffs)
+        for m in range(2, max_multiplier + 1):
+            min_dist = max(min_pitch, int(pitch * m * peak_min_dist_ratio))
+            cand = find_peaks(proj, min_dist=min_dist)
+            if len(cand) < min_peaks_for_merge:
+                continue
+            cand_diffs = np.diff(cand)
+            disp = _spacing_dispersion(cand_diffs)
+            if disp < best_disp:
+                best_disp = disp
+                best_peaks = cand
+                best_pitch = float(np.median(cand_diffs))
+                if best_disp <= dispersion_th:
+                    break
+        peaks, pitch = best_peaks, best_pitch
 
-    best_peaks, best_pitch = peaks, pitch
-    best_disp = _spacing_dispersion(diffs)
-    for m in range(2, max_multiplier + 1):
-        min_dist = max(min_pitch, int(pitch * m * peak_min_dist_ratio))
-        cand = find_peaks(proj, min_dist=min_dist)
-        if len(cand) < min_peaks_for_merge:
-            continue
-        cand_diffs = np.diff(cand)
-        disp = _spacing_dispersion(cand_diffs)
-        if disp < best_disp:
-            best_disp = disp
-            best_peaks = cand
-            best_pitch = float(np.median(cand_diffs))
-            if best_disp <= dispersion_th:
-                break
-    return best_pitch, best_peaks
+    return _fill_pitch_gaps(proj, peaks, pitch, initial_peaks, min_pitch,
+                            dispersion_th)
 
 
 def discover_lines(rot_gray: np.ndarray, axis: str,
