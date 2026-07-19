@@ -1,8 +1,4 @@
-# 忽略圖片中的資料夾
-testdata/
-ve_core/
-ve_server/
-ve_ui/
+# 虛擬環境（ve_core/ ve_server/ ve_ui/ tests/ testdata/ 是原始碼與測資，必須追蹤，勿加入忽略）
 venv/
 
 # Python 常見暫存檔案
