@@ -11,5 +11,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install -r requirements-ui.txt
-      - run: python -m pytest -k "not test_teach_matches_golden and not test_inspect_discovery_ng and not test_inspect_taught_ng and not test_inspect_taught_ok and not test_inspect_manual_roi and not test_defects_match_ground_truth and not test_dark_line_found_via_pipeline_inversion and not test_cold_run_finds_ground_truth and not test_teach_then_taught_inspect_roundtrip and not test_judge_criteria_applied"
+      - run: pip install -r vision_engine_py/requirements-ui.txt
+      - run: python -m pytest tests -q
+        working-directory: vision_engine_py
