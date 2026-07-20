@@ -62,6 +62,29 @@ def test_protocol_security_image_path_disallowed_extensions():
         assert "invalid image_path extension" in str(exc_info.value)
 
 
+def test_protocol_security_path_traversal():
+    traversal_paths = [
+        "../etc/passwd.png",
+        "D:/images/../../etc/passwd.png",
+        "images/..\\passwd.png",
+        "..\\..\\sensitive.png",
+    ]
+    for path in traversal_paths:
+        req_inspect = {
+            "request_id": "REQ-123456",
+            "cmd": "inspect",
+            "image_path": path,
+            "piece_id": "P001",
+            "recipe_name": "RECIPE_A",
+            "roi_mode": "AutoFrame",
+            "param_source": "None"
+        }
+        with pytest.raises(ProtocolError) as exc_info:
+            parse_request(json.dumps(req_inspect))
+        assert exc_info.value.code == E_BAD_FIELD
+        assert "path traversal detected" in str(exc_info.value)
+
+
 def test_protocol_security_other_cmds_not_affected():
     # ping and shutdown shouldn't be affected by image_path checks even if present (though typically not present)
     ping_req = {

@@ -69,8 +69,11 @@ def parse_request(line: str) -> dict:
     if cmd in ("inspect", "teach"):
         if not isinstance(req.get("image_path"), str) or not req["image_path"]:
             raise ProtocolError(E_BAD_FIELD, "missing image_path")
-        # 安全增強：限制 image_path 的副檔名，防止目錄穿越與讀取非影像檔
-        _, ext = os.path.splitext(req["image_path"].lower())
+        # 安全增強：防止目錄穿越並限制 image_path 的副檔名
+        path = req["image_path"]
+        if ".." in path or "/.." in path or "\\.." in path or "../" in path or "..\\" in path:
+            raise ProtocolError(E_BAD_FIELD, "path traversal detected in image_path")
+        _, ext = os.path.splitext(path.lower())
         if ext not in (".png", ".bmp", ".jpg", ".jpeg", ".tif", ".tiff"):
             raise ProtocolError(E_BAD_FIELD, "invalid image_path extension")
         rm = req.get("roi_mode", "AutoFrame")
