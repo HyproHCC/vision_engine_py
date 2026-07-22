@@ -343,3 +343,58 @@ def test_family_detection_break_lengths_px_defaults_empty_for_teach():
                       angle_tol_deg=5.0, image_name="ok.png")
     assert isinstance(r, ve_core.TeachResult)
     assert all(f.break_lengths_px == [] for f in r.families)
+
+
+# ------------------------------------------------- 需求：協定安全驗證
+def test_protocol_image_path_security_validation():
+    from ve_server import protocol as P
+    import json
+
+    # 1. 正常案例：合法副檔名與路徑
+    valid_req = {
+        "request_id": "REQ-000001",
+        "cmd": "inspect",
+        "image_path": "D:/VisionWork/img_001.png",
+        "roi_mode": "AutoFrame",
+        "param_source": "None"
+    }
+    parsed = P.parse_request(json.dumps(valid_req))
+    assert parsed["image_path"] == "D:/VisionWork/img_001.png"
+
+    # 2. 異常案例：目錄穿越 (Directory Traversal)
+    traversal_req = {
+        "request_id": "REQ-000002",
+        "cmd": "inspect",
+        "image_path": "D:/VisionWork/../../etc/passwd.png",
+        "roi_mode": "AutoFrame",
+        "param_source": "None"
+    }
+    with pytest.raises(P.ProtocolError) as excinfo:
+        P.parse_request(json.dumps(traversal_req))
+    assert excinfo.value.code == P.E_BAD_FIELD
+    assert "directory traversal" in excinfo.value.msg
+
+    # 3. 異常案例：非法副檔名 (.txt)
+    bad_ext_req = {
+        "request_id": "REQ-000003",
+        "cmd": "inspect",
+        "image_path": "D:/VisionWork/img_001.txt",
+        "roi_mode": "AutoFrame",
+        "param_source": "None"
+    }
+    with pytest.raises(P.ProtocolError) as excinfo:
+        P.parse_request(json.dumps(bad_ext_req))
+    assert excinfo.value.code == P.E_BAD_FIELD
+    assert "invalid image file extension" in excinfo.value.msg
+
+    # 4. 異常案例：非法副檔名 (無副檔名)
+    no_ext_req = {
+        "request_id": "REQ-000004",
+        "cmd": "teach",
+        "image_path": "D:/VisionWork/img_001",
+        "roi_mode": "AutoFrame"
+    }
+    with pytest.raises(P.ProtocolError) as excinfo:
+        P.parse_request(json.dumps(no_ext_req))
+    assert excinfo.value.code == P.E_BAD_FIELD
+    assert "invalid image file extension" in excinfo.value.msg
