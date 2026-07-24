@@ -72,7 +72,7 @@ Request:
 ```
 
 - `roi_mode`: `"Manual"` 時使用 `roi_rect`（原圖座標）；`"AutoFrame"` 時 engine 自動定位大黑框內緣，忽略 `roi_rect`。
-- `roi_rect` / `roi_used` 一律是 LabVIEW IMAQ 慣例的 Rectangle cluster：`{left, top, right, bottom}`，**right/bottom 不含**（寬 = right − left、高 = bottom − top）。`roi_mode="Manual"` 時 `right>left` 且 `bottom>top`，否則回 `error_code=122`。
+- `roi_rect` / `roi_used` 一律是 LabVIEW IMAQ 慣例的 Rectangle cluster：`{left, top, right, bottom}`，**座標值必須為整數**，且 **right/bottom 不含**（寬 = right − left、高 = bottom − top）。`roi_mode="Manual"` 時必須滿足 `right>left` 且 `bottom>top` 且所有座標欄位皆為整數，否則回 `error_code=122`。不保留舊 `{x, y, w, h}` 格式的相容。
 - `param_source`: `"None" | "Taught" | "Manual"`。`Taught` 走驗證式檢測（用 `taught_params`）；`None` 退回發現式並在回應註記 `"detection_mode": "discovery"`。
 - `taught_params`: JSON 物件。`param_source != "Taught"` 時可省略或給 `null`。
 
