@@ -343,3 +343,54 @@ def test_family_detection_break_lengths_px_defaults_empty_for_teach():
                       angle_tol_deg=5.0, image_name="ok.png")
     assert isinstance(r, ve_core.TeachResult)
     assert all(f.break_lengths_px == [] for f in r.families)
+
+
+# --------------------------------------- 需求：安全協定解析防護
+def test_protocol_security_path_traversal():
+    import json
+    from ve_server.protocol import parse_request, ProtocolError, E_BAD_FIELD
+
+    # 1. 正常請求應順利解析
+    valid_req = {
+        "request_id": "REQ-01",
+        "cmd": "inspect",
+        "image_path": "C:/images/test.png",
+        "recipe_name": "TYPE_A"
+    }
+    parsed = parse_request(json.dumps(valid_req))
+    assert parsed["image_path"] == "C:/images/test.png"
+
+    # 2. 包含 '..' 應被拒絕並拋出 ProtocolError E_BAD_FIELD
+    traversal_req = {
+        "request_id": "REQ-02",
+        "cmd": "inspect",
+        "image_path": "C:/images/../secrets.txt",
+        "recipe_name": "TYPE_A"
+    }
+    with pytest.raises(ProtocolError) as exc_info:
+        parse_request(json.dumps(traversal_req))
+    assert exc_info.value.code == E_BAD_FIELD
+    assert "directory traversal" in exc_info.value.msg
+
+    # 3. 不允許非影像副檔名
+    invalid_ext_req = {
+        "request_id": "REQ-03",
+        "cmd": "inspect",
+        "image_path": "C:/images/test.exe",
+        "recipe_name": "TYPE_A"
+    }
+    with pytest.raises(ProtocolError) as exc_info:
+        parse_request(json.dumps(invalid_ext_req))
+    assert exc_info.value.code == E_BAD_FIELD
+    assert "invalid image file extension" in exc_info.value.msg
+
+    # 4. 允許各種常見影像副檔名（大小寫皆可）
+    for ext in (".png", ".BMP", ".jpg", ".JPEG", ".TIF", ".tiff"):
+        allowed_req = {
+            "request_id": "REQ-04",
+            "cmd": "inspect",
+            "image_path": f"C:/images/test{ext}",
+            "recipe_name": "TYPE_A"
+        }
+        parsed = parse_request(json.dumps(allowed_req))
+        assert parsed["image_path"] == f"C:/images/test{ext}"
