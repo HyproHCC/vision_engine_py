@@ -343,3 +343,45 @@ def test_family_detection_break_lengths_px_defaults_empty_for_teach():
                       angle_tol_deg=5.0, image_name="ok.png")
     assert isinstance(r, ve_core.TeachResult)
     assert all(f.break_lengths_px == [] for f in r.families)
+
+
+def test_protocol_security_path_traversal():
+    from ve_server.protocol import parse_request, ProtocolError, E_BAD_FIELD
+    import json
+
+    # 1. 正常的請求 (應通過驗證)
+    valid_req = {
+        "request_id": "REQ-001",
+        "cmd": "inspect",
+        "image_path": "D:/VisionWork/img.png",
+        "roi_mode": "AutoFrame"
+    }
+    parsed = parse_request(json.dumps(valid_req))
+    assert parsed["image_path"] == "D:/VisionWork/img.png"
+
+    # 2. 測試大小寫不同的合法副檔名
+    for ext in (".PNG", ".bmp", ".JPG", ".jpeg", ".Tif", ".TIFF"):
+        req = dict(valid_req, image_path=f"D:/VisionWork/img{ext}")
+        parsed = parse_request(json.dumps(req))
+        assert parsed["image_path"].endswith(ext)
+
+    # 3. 測試不合法的副檔名
+    for bad_ext in (".txt", ".exe", ".png.txt", ".sh", "", ".png "):
+        req = dict(valid_req, image_path=f"D:/VisionWork/img{bad_ext}")
+        with pytest.raises(ProtocolError) as exc_info:
+            parse_request(json.dumps(req))
+        assert exc_info.value.code == E_BAD_FIELD
+
+    # 4. 測試路徑遍歷漏洞 (.. 序列)
+    bad_paths = (
+        "../img.png",
+        "D:/VisionWork/../img.png",
+        "D:\\VisionWork\\..\\img.png",
+        "D:/VisionWork/..",
+        "image_path/../../something.png"
+    )
+    for bad_path in bad_paths:
+        req = dict(valid_req, image_path=bad_path)
+        with pytest.raises(ProtocolError) as exc_info:
+            parse_request(json.dumps(req))
+        assert exc_info.value.code == E_BAD_FIELD
