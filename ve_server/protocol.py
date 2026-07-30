@@ -66,8 +66,21 @@ def parse_request(line: str) -> dict:
             raise ProtocolError(E_BAD_FIELD, "field '%s' contains non-ASCII" % f)
 
     if cmd in ("inspect", "teach"):
-        if not isinstance(req.get("image_path"), str) or not req["image_path"]:
+        image_path = req.get("image_path")
+        if not isinstance(image_path, str) or not image_path:
             raise ProtocolError(E_BAD_FIELD, "missing image_path")
+
+        # 1. 防止路徑穿越攻擊 (Directory Traversal Protection)
+        # 拒絕包含 ".." 的路徑，避免訪問不安全之系統目錄或檔案。
+        if ".." in image_path or "../" in image_path or "..\\" in image_path:
+            raise ProtocolError(E_BAD_FIELD, "path traversal sequence detected in image_path")
+
+        # 2. 限制允許的影像副檔名 (Allowed File Extensions Validation)
+        # 僅允許標準影像副檔名，防止讀取非影像之敏感檔案。
+        allowed_extensions = (".png", ".bmp", ".jpg", ".jpeg", ".tif", ".tiff")
+        if not image_path.lower().endswith(allowed_extensions):
+            raise ProtocolError(E_BAD_FIELD, "invalid image file extension in image_path")
+
         rm = req.get("roi_mode", "AutoFrame")
         if rm not in ("Manual", "AutoFrame"):
             raise ProtocolError(E_BAD_FIELD, "roi_mode must be Manual|AutoFrame")
