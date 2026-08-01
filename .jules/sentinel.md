@@ -1,0 +1,4 @@
+## 2026-03-03 - Protocol-level Image Path Validation (Traversal and Arbitrary File Extension Bypass)
+**Vulnerability:** The TCP server allowed arbitrary 'image_path' inputs to be supplied for the 'inspect' and 'teach' commands, without validating file extensions or directory traversal sequences (like '..'). This could allow malicious clients to perform directory traversal and potentially access/expose arbitrary non-image files or cause server errors.
+**Learning:** The application boundary trusted the LabVIEW client to validate inputs, leaving the backend TCP server without defense-in-depth security controls at its own protocol boundary.
+**Prevention:** Input validation must always be performed at the service boundary. Reject paths containing ".." and restrict acceptable file extensions strictly to known image formats (e.g., .png, .bmp, .jpg, .jpeg, .tif, .tiff).
