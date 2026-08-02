@@ -1,0 +1,4 @@
+## 2026-03-08 - [Path Traversal and File Extension Restriction in TCP server]
+**Vulnerability:** Arbitrary path input and path traversal (e.g., using `..`) via the `image_path` field, as well as loading non-image files through the engine's CV2 decode endpoint.
+**Learning:** In a TCP command processor, validating commands and basic field existence is not sufficient. Inputs mapping directly to file system operations (like `image_path`) must be sanitized to prevent directory traversal and restrict operations to expected types (e.g. specific image extensions) at the protocol parsing boundary, even if downstream layers also check file existence.
+**Prevention:** Perform regex or substring check for `..` and validate the filename extension against a strict whitelist at the boundary of message parsing before attempting any file access or passing to the engine.
