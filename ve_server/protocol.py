@@ -68,6 +68,16 @@ def parse_request(line: str) -> dict:
     if cmd in ("inspect", "teach"):
         if not isinstance(req.get("image_path"), str) or not req["image_path"]:
             raise ProtocolError(E_BAD_FIELD, "missing image_path")
+
+        # Security validation: Prevent path traversal
+        img_path = req["image_path"]
+        if ".." in img_path:
+            raise ProtocolError(E_BAD_FIELD, "directory traversal sequence is not allowed")
+
+        # Security validation: Limit allowed image extensions
+        if not img_path.lower().endswith((".png", ".bmp", ".jpg", ".jpeg", ".tif", ".tiff")):
+            raise ProtocolError(E_BAD_FIELD, "invalid image file extension")
+
         rm = req.get("roi_mode", "AutoFrame")
         if rm not in ("Manual", "AutoFrame"):
             raise ProtocolError(E_BAD_FIELD, "roi_mode must be Manual|AutoFrame")
