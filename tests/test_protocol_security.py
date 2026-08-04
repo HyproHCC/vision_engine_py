@@ -4,7 +4,7 @@ import json
 from ve_server.protocol import parse_request, ProtocolError, E_BAD_FIELD
 
 def test_valid_image_paths_allowed():
-    # 測試合法副檔名的 image_path
+    # Test allowing valid image extensions in image_path
     valid_extensions = ["png", "bmp", "jpg", "jpeg", "tif", "tiff", "PNG", "BMP", "Jpeg"]
     for ext in valid_extensions:
         req = {
@@ -17,7 +17,7 @@ def test_valid_image_paths_allowed():
         assert parsed["image_path"] == f"D:/images/test.{ext}"
 
 def test_directory_traversal_rejected():
-    # 測試含有 .. 符號的路徑被阻擋
+    # Test blocking paths that contain directory traversal sequences (..)
     traversal_paths = [
         "../test.png",
         "D:/images/../secret.png",
@@ -39,7 +39,7 @@ def test_directory_traversal_rejected():
         assert "directory traversal" in exc_info.value.msg
 
 def test_invalid_extensions_rejected():
-    # 測試不合法副檔名被阻擋
+    # Test blocking invalid/unsupported file extensions
     invalid_paths = [
         "test.txt",
         "test.exe",
@@ -62,7 +62,7 @@ def test_invalid_extensions_rejected():
         assert "invalid image extension" in exc_info.value.msg
 
 def test_teach_command_also_validated():
-    # 確保 teach 指令同樣受到驗證限制
+    # Test that the teach command is subjected to the same security constraints
     req_traversal = {
         "request_id": "REQ-124",
         "cmd": "teach",
