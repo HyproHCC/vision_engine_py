@@ -1,0 +1,4 @@
+## 2026-08-11 - Input Validation at the Protocol Boundary
+**Vulnerability:** The input `image_path` field in `inspect` and `teach` commands was not checked for path traversal (e.g., `..`) or restricted to safe image file extensions. An attacker could specify arbitrary file paths, potentially leading to arbitrary file reading or loading errors, exposing or traversing files on the host system.
+**Learning:** Security validation must occur at the absolute outermost boundary of the application (the protocol layer `protocol.py`). Relying solely on internal libraries (like OpenCV or custom loaders) to handle path traversal safely is dangerous because it leads to "defense in depth" gaps.
+**Prevention:** Validate all string fields representing file paths at the protocol boundary. Enforce a strict permit-list of acceptable file extensions (e.g., `.png`, `.bmp`, `.jpg`, `.jpeg`, `.tif`, `.tiff`) and reject any path containing directory traversal sequences (e.g., `..`).
