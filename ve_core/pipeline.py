@@ -41,6 +41,11 @@ from .types import (FAMILY_AXES, AlgoConfig, BreakDefect, DetectionAnomaly,
 logger = logging.getLogger("ve_core")
 
 
+def _dark_line_view(sub: np.ndarray) -> np.ndarray:
+    """實機切割線為暗線；反相後轉為「亮線」供給既有演算法。"""
+    return 255 - sub
+
+
 def _find_inner_roi_in_rect(image: np.ndarray, x, y, w, h,
                             cfg: AlgoConfig, margin: int = 4) -> Rect:
     """在給定粗略矩形（AutoInRoi 的操作員框選）內裁子圖找大黑框內緣，
@@ -151,7 +156,7 @@ def find_family_lines(geom: FamilyGeometry, cfg: AlgoConfig,
     """找線。回傳 {'positions': [...], 'pitch_px': f, 'mode': str}；
     該族無線（taught 中無此 axis / 發現式找不到）回 None。
     taught 模式定位失敗丟 LinesNotFound（驗證式的失敗是硬錯誤）。"""
-    sub = geom.sub
+    sub = _dark_line_view(geom.sub)
     if taught is not None:
         fam = taught.family(geom.axis)
         if fam is None:
@@ -181,7 +186,7 @@ def detect_family_breaks(geom: FamilyGeometry, positions: list,
                          line_id_start: int) -> list:
     """單族斷點偵測，回傳 list[BreakDefect]（原圖座標）。
     line_id 自 line_id_start+1 起連續編號（跨族累計由呼叫端負責）。"""
-    sub = geom.sub
+    sub = _dark_line_view(geom.sub)
     ax0, ay0 = geom.region.x, geom.region.y
     defects = []
     lid = line_id_start
