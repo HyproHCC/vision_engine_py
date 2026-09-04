@@ -42,6 +42,8 @@ def test_path_traversal_rejected():
         "../etc/passwd.png",
         "images/../secret.png",
         "C:\\Users\\..\\secret.jpg",
+        "C:../secret.png",
+        "C:..\\secret.png",
         "..",
         "a/b/../../secret.png",
     ]

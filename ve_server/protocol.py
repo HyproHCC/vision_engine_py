@@ -72,8 +72,7 @@ def parse_request(line: str) -> dict:
         img_path = req.get("image_path")
         if not isinstance(img_path, str) or not img_path:
             raise ProtocolError(E_BAD_FIELD, "missing image_path")
-        norm_path = img_path.replace("\\", "/")
-        if ".." in norm_path.split("/"):
+        if ".." in img_path:
             raise ProtocolError(E_BAD_FIELD, "directory traversal in image_path is not allowed")
         if not img_path.lower().endswith(ALLOWED_IMAGE_EXTS):
             raise ProtocolError(E_BAD_FIELD, "unsupported image extension in image_path")
