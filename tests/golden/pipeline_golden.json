@@ -368,7 +368,7 @@
       ],
       "reference": {
         "image": "synthetic_ok.png",
-        "taught_at": "2026-07-16T07:18:04"
+        "taught_at": "2026-09-07T12:27:57"
       },
       "thresholds": {
         "band_halfwidth_px": 4,
