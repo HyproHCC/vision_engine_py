@@ -1,0 +1,4 @@
+## 2026-07-14 - Path Traversal and Arbitrary File Access in Image Path Protocol Endpoint
+**Vulnerability:** The TCP server endpoint `parse_request` in `ve_server/protocol.py` did not restrict file extensions or validate directory traversal sequences (`..`) in `image_path` parameters for `inspect` and `teach` commands, allowing potential arbitrary file operations via the engine image loading interface.
+**Learning:** External client inputs like `image_path` passed over TCP protocol boundaries must be strictly validated for both path manipulation characters and expected file type extensions before reaching downstream file system operations.
+**Prevention:** Enforce strict allowlists for file extensions (`.png`, `.bmp`, `.jpg`, `.jpeg`, `.tif`, `.tiff`) and explicitly reject path traversal (`..`) sequences at the protocol boundary.
