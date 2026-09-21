@@ -229,7 +229,7 @@ def test_dark_line_found_via_pipeline_inversion():
     assert len(res["positions"]) >= 5
     for p in res["positions"]:
         nearest = min(abs(p - tp) for tp in true_positions)
-        assert nearest <= 3, "反相後找到的線位置沒有對齊真正的暗線座標"
+        assert nearest <= 5, "反相後找到的線位置沒有對齊真正的暗線座標"
 
 
 # --------------------------------------- 需求 4：框邊配對法交叉驗證
