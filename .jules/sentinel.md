@@ -1,0 +1,4 @@
+## 2026-07-16 - Path Traversal and Image File Extension Validation in Protocol Parser
+**Vulnerability:** Unsanitized `image_path` in TCP JSON commands (`inspect`, `teach`) permitted relative path traversal sequences (`..`) and non-image extensions (e.g. `.py`, `.exe`, `.json`), creating risks of arbitrary file reading or unintentional file copies via NG image save operations.
+**Learning:** Even when string input fields are restricted to ASCII at the protocol boundary, string path fields passed directly to file system operations (`os.path.isfile`, `open`) must be validated against path traversal sequences and restricted to expected image file extensions.
+**Prevention:** Strictly validate `image_path` at the protocol parsing layer in `ve_server/protocol.py`, rejecting path traversal sequences (`..`) and enforcing a white-list of image extensions (`.png`, `.bmp`, `.jpg`, `.jpeg`, `.tif`, `.tiff`).
