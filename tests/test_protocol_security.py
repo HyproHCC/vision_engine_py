@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import pytest
-from ve_server.protocol import parse_request, ProtocolError, E_BAD_FIELD, E_UNKNOWN_CMD, E_BAD_JSON
+from ve_server.protocol import parse_request, ProtocolError, E_BAD_FIELD
+
 
 def test_protocol_security_path_traversal():
     req_traversal = {
@@ -14,6 +15,7 @@ def test_protocol_security_path_traversal():
     assert exc_info.value.code == E_BAD_FIELD
     assert "path traversal" in exc_info.value.msg.lower()
 
+
 def test_protocol_security_invalid_extension():
     req_invalid_ext = {
         "request_id": "req-2",
@@ -26,6 +28,7 @@ def test_protocol_security_invalid_extension():
     assert exc_info.value.code == E_BAD_FIELD
     assert "invalid image file extension" in exc_info.value.msg.lower()
 
+
 def test_protocol_security_valid_image_path():
     req_valid = {
         "request_id": "req-3",
@@ -35,6 +38,7 @@ def test_protocol_security_valid_image_path():
     }
     parsed = parse_request(str(req_valid).replace("'", '"'))
     assert parsed["image_path"] == "testdata/valid_image.png"
+
 
 def test_protocol_security_non_ascii_field():
     req_non_ascii = {
