@@ -34,6 +34,8 @@ VALID_CMDS = ("ping", "inspect", "teach", "shutdown")
 # client 送來必須是 ASCII 的字串欄位
 ASCII_FIELDS = ("image_path", "piece_id", "recipe_name")
 
+ALLOWED_IMAGE_EXTS = (".png", ".bmp", ".jpg", ".jpeg", ".tif", ".tiff")
+
 
 class ProtocolError(Exception):
     def __init__(self, code: int, msg: str):
@@ -66,8 +68,17 @@ def parse_request(line: str) -> dict:
             raise ProtocolError(E_BAD_FIELD, "field '%s' contains non-ASCII" % f)
 
     if cmd in ("inspect", "teach"):
-        if not isinstance(req.get("image_path"), str) or not req["image_path"]:
+        image_path = req.get("image_path")
+        if not isinstance(image_path, str) or not image_path:
             raise ProtocolError(E_BAD_FIELD, "missing image_path")
+
+        # 路徑安全檢查：檔名副檔名與目錄穿越 (Path Traversal) 檢查
+        normalized_path = image_path.replace("\\", "/")
+        if ".." in normalized_path.split("/"):
+            raise ProtocolError(E_BAD_FIELD, "directory traversal sequence '..' in image_path is forbidden")
+        if not normalized_path.lower().endswith(ALLOWED_IMAGE_EXTS):
+            raise ProtocolError(E_BAD_FIELD, "invalid image_path extension, allowed: %s" % ", ".join(ALLOWED_IMAGE_EXTS))
+
         rm = req.get("roi_mode", "AutoFrame")
         if rm not in ("Manual", "AutoFrame"):
             raise ProtocolError(E_BAD_FIELD, "roi_mode must be Manual|AutoFrame")
