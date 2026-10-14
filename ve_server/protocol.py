@@ -8,6 +8,7 @@
 - client 字串欄位只允許 ASCII
 """
 import json
+import os
 import time
 
 # ---- engine error codes（PROTOCOL.md 第 9 節）----
@@ -73,7 +74,8 @@ def parse_request(line: str) -> dict:
         if not isinstance(img_path, str) or not img_path:
             raise ProtocolError(E_BAD_FIELD, "missing image_path")
         # 防範路徑穿越攻擊 (Path Traversal) 與任意檔案類型讀取
-        if ".." in img_path:
+        normalized_parts = os.path.normpath(img_path).replace("\\", "/").split("/")
+        if ".." in img_path or ".." in normalized_parts:
             raise ProtocolError(E_BAD_FIELD, "image_path must not contain '..'")
         if not img_path.lower().endswith(VALID_IMAGE_EXTS):
             raise ProtocolError(
