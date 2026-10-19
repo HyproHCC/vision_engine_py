@@ -70,7 +70,8 @@ def parse_request(line: str) -> dict:
         image_path = req.get("image_path")
         if not isinstance(image_path, str) or not image_path:
             raise ProtocolError(E_BAD_FIELD, "missing image_path")
-        if ".." in image_path:
+        path_parts = image_path.replace("\\", "/").split("/")
+        if ".." in path_parts:
             raise ProtocolError(E_BAD_FIELD, "image_path cannot contain directory traversal ('..')")
         ext = os.path.splitext(image_path)[1].lower()
         if ext not in (".png", ".bmp", ".jpg", ".jpeg", ".tif", ".tiff"):
